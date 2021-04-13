@@ -31,7 +31,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		food_num=num;
 		init();
 	}
-	
+	//
 	public void init() {
 		main.switch_panel(MainUI.BOARD);
 		inside_panel = new JPanel(new BorderLayout());

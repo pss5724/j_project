@@ -23,7 +23,7 @@ public class boardUI_Category {
 	public static final int BOONSIK=4;
 	public static final int KOREA_FOOD=5;
 	
-	
+	//
 	public boardUI_Category(MainUI main) {
 		this.main = main;
 		init();
