@@ -22,11 +22,11 @@ public class LoginUI{
 	JButton login, join;
 	JTextField id_tf;
 	JPasswordField pass_tf;
-		
+	
 	//Constructor
 	public LoginUI() {
 		init();
-	}
+	} 
 	 
 	//Method
 	public void init() {
