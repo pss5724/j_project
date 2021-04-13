@@ -29,7 +29,7 @@ public class boardUI_Write {
 			this.main = main;
 			init();
 		}
-		//
+		
 		//Method
 		public void init() {
 			main.switch_panel(MainUI.BOARD);

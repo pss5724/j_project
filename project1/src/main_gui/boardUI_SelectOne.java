@@ -26,7 +26,7 @@ public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
 		this.food_num = food_num;
 		init();
 	}
-//
+
 	public void init() {
 		main.switch_panel(MainUI.BOARD);
 		main.board_panel.setLayout(new BorderLayout());

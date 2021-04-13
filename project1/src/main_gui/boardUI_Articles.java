@@ -76,7 +76,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		ListSelectionModel select = table.getSelectionModel();
 		select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		select.addListSelectionListener(ac);
-	}
+	} 
 	
 	class Articles_clickon implements ListSelectionListener{
 		//Field
