@@ -9,22 +9,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main_system.HororogMgmSystem;
+
 public class MainUI {
 	//Field
+	public HororogMgmSystem system = new HororogMgmSystem();
+	JFrame jf;
 	JPanel read_panel,write_panel,category_panel,content_panel,title_panel,btn_panel,top_panel,menu_panel, chat_panel, board_panel, mycontent_panel,
 	search_panel, exit_panel, member_panel;
-	JFrame jf;
 	JLabel title;
 	ArrayList<JButton> btnlist = new ArrayList<JButton>();
 	
 	
 	
-	public static final int BOARD = 1;
-	public static final int READ = 2;
-	public static final int WRITE = 3;
-	public static final int MYCONTENT = 4;
-	public static final int SEARCH = 5;
-	public static final int MEMBER = 6;
+	public static final int BOARD = 1;	//게시판
+	public static final int READ = 2;	//게시글
+	public static final int WRITE = 3;	//글쓰기
+	public static final int MYCONTENT = 4;	//내글
+	public static final int SEARCH = 5;	//검색
+	public static final int MEMBER = 6;	//회원관리
 	
 	
 	//Constructor
@@ -49,6 +52,9 @@ public class MainUI {
 		search_panel = new JPanel();
 		exit_panel = new JPanel();
 		member_panel = new JPanel();
+		search_panel = new JPanel();
+		read_panel = new JPanel();
+		write_panel = new JPanel();
 		String[] menulist = {"채팅","게시판","내글","검색","종료","회원관리"};
 		
 		for(String name : menulist) {
@@ -59,8 +65,9 @@ public class MainUI {
 		
 		for(JButton btn : btnlist) {
 			btn_panel.add(btn);
-			
+			btn.addActionListener(new MainUIEvent(this));
 		}
+		
 		
 		menu_panel.add(btn_panel);
 		title_panel.add(title);
@@ -86,6 +93,7 @@ public class MainUI {
 		read_panel.setVisible(false);
 		write_panel.setVisible(false);
 		mycontent_panel.setVisible(false);
+		search_panel.setVisible(false);
 		member_panel.setVisible(false);
 		
 		
@@ -109,7 +117,9 @@ public class MainUI {
 			mycontent_panel.setVisible(true);
 			break;
 		case SEARCH :
+			System.out.println("search 전");
 			search_panel.removeAll();
+			System.out.println("search 후");
 			search_panel.setVisible(true);
 			break;
 		case MEMBER :
