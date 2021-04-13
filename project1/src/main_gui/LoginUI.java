@@ -27,7 +27,7 @@ public class LoginUI{
 	public LoginUI() {
 		init();
 	}
-	
+	 
 	//Method
 	public void init() {
 		
