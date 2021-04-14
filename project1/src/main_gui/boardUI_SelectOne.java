@@ -2,11 +2,11 @@ package main_gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.TextArea;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import main_vo.ArticleVO;
 
@@ -18,7 +18,7 @@ public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
 	category_panel, date_panel, contents_panel, button_panel,
 	above_panel;
 	JButton update_btn,delete_btn;
-	TextArea contents_ta;
+	JTextArea contents_ta;
 	
 	public boardUI_SelectOne(MainUI main, int food_num, int rownum) {
 		this.main = main;
@@ -33,11 +33,11 @@ public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
 		
 		ArticleVO vo = main.system.select_one(food_num, rownum);
 		
-		title_l = new JLabel("제목");
-		category_l = new JLabel("카테고리");
-		writer_l = new JLabel("글쓴이");
-		date_l = new JLabel("날짜");
-		contents_ta = new TextArea(4,30);
+		title_l = new JLabel(vo.getTitle());
+		category_l = new JLabel(vo.getCategory());
+		writer_l = new JLabel(vo.getWriter());
+		date_l = new JLabel(vo.getDate());
+		contents_ta = new JTextArea(4,30);
 		update_btn = new JButton("수정");
 		delete_btn = new JButton("삭제");
 		

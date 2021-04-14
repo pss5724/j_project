@@ -2,6 +2,8 @@ package main_gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -54,12 +56,33 @@ public class boardUI_Category {
 //			button_panel.add(btn);
 //			main.board_panel.add(button_panel);
 			main.board_panel.add(btn);
-			btn.addActionListener(new MainUIEvent(main, this));
+			btn.addActionListener(new ctgAction());
 		}
 		
-			
 		main.content_panel.add(main.board_panel);
 		main.jf.setVisible(true);
 	}
 	
+	
+	class ctgAction implements ActionListener{	//게시판에서 각 카테고리 눌렀을 때
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Object obj = e.getSource();
+			if(obj == btnlist.get(boardUI_Category.ALL_FOOD)) {
+				new boardUI_Articles(main, boardUI_Category.ALL_FOOD);
+			}else if(obj == btnlist.get(boardUI_Category.CHINA_FOOD)) {
+				new boardUI_Articles(main, boardUI_Category.CHINA_FOOD);
+			}else if(obj == btnlist.get(boardUI_Category.WEST_FOOD)) {
+				new boardUI_Articles(main, boardUI_Category.WEST_FOOD);
+			}else if(obj == btnlist.get(boardUI_Category.JAPAN_FOOD)) {
+				new boardUI_Articles(main, boardUI_Category.JAPAN_FOOD);
+			}else if(obj == btnlist.get(boardUI_Category.BOONSIK)) {
+				new boardUI_Articles(main, boardUI_Category.BOONSIK);
+			}else if(obj == btnlist.get(boardUI_Category.KOREA_FOOD)) {
+				new boardUI_Articles(main, boardUI_Category.KOREA_FOOD);
+			}
+		}
+	}
 }
