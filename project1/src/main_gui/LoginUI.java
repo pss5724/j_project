@@ -3,20 +3,22 @@ package main_gui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import main_system.MainSystem;
+
+
 
 
 public class LoginUI{
 	//Field
+	MainSystem system = new MainSystem();
 	MainUI main;
 	JFrame jf;
 	JButton login, join;
@@ -49,8 +51,8 @@ public class LoginUI{
 		label_panel.add(id_label);	label_panel.add(pass_label);
 		tf_panel.add(id_tf);	tf_panel.add(pass_tf);
 		
-		login = new JButton("LOGIN");
-		join = new JButton("JOIN");
+		login = new JButton("로그인");
+		join = new JButton("회원가입");
 		btn_panel.add(login);	btn_panel.add(join);
 		
 		jf.add(BorderLayout.NORTH, img_label);
@@ -61,49 +63,15 @@ public class LoginUI{
 		jf.setSize(350,200);
 		jf.setVisible(true);
 		
-//		login.addActionListener(this);
-//		join.addActionListener(this);
+		LoginUIEvent eventObj = new LoginUIEvent(this, system);
+		login.addActionListener(eventObj);
+		join.addActionListener(eventObj);
+		jf.addWindowListener(eventObj);
+
 	}
 
 	//LoginEvent로 넘길 예정
-	//@Override
-	
-//	public void actionPerformed(ActionEvent e) {
-//		Object obj = e.getSource();
-//		
-//		if(obj == login) {
-//			login_proc();
-//		}else if(obj == join) {
-//			//join_proc();
-//		}
-//	}
-	
 
-//	public void login_proc() {
-//		if(id_tf.getText().equals("")) {
-//			JOptionPane.showMessageDialog(null, 
-//					"아이디를 입력해주세요");
-//			id_tf.requestFocus();
-//		}else if(pass_tf.getText().equals("")) {
-//			JOptionPane.showMessageDialog(null, 
-//					"패스워드를 입력해주세요");
-//			pass_tf.requestFocus();
-//		}else {
-			//로그인체크 : system.loginCheck(아이디, 패스워드); 
-//			boolean result = loginCheck(id_tf.getText(), pass_tf.getText());
-//			if(result) {
-//				JOptionPane.showMessageDialog(null, 
-//						"로그인 성공");
-//				new MainUI();
-//				login.setText("    로그아웃    ");
-				
-//			}else {
-//				JOptionPane.showMessageDialog(null, 
-//						"로그인 실패");
-//			}
-//		}
-		
-//	}
 	
 
 }
