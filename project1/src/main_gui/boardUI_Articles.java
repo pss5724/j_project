@@ -8,9 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import main_vo.ArticleVO;
 
@@ -31,7 +34,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		food_num=num;
 		init();
 	}
-	//
+	
 	public void init() {
 		main.switch_panel(MainUI.BOARD);
 		inside_panel = new JPanel(new BorderLayout());
@@ -54,6 +57,20 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		table.setRowHeight(25);
 		table.setAutoCreateRowSorter(false);
 		
+		
+		table.getColumn("NO").setPreferredWidth(20);
+		table.getColumn("카테고리").setPreferredWidth(60);
+		table.getColumn("작성자").setPreferredWidth(50);
+		table.getColumn("제목").setPreferredWidth(200);
+		table.getColumn("등록일").setPreferredWidth(100);
+		
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();	//셀 가운데 정렬
+		dtcr.setHorizontalAlignment(SwingConstants.CENTER);		
+		TableColumnModel tcm = table.getColumnModel();
+		for(int i=0;i<5;i++) {
+			tcm.getColumn(i).setCellRenderer(dtcr);
+		}
+
 		JScrollPane pane = new JScrollPane(table);
 		
 		write_btn = new JButton("글쓰기");
@@ -70,13 +87,16 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		
 		write_btn.addActionListener(new MainUIEvent(main, this));
 		
+		//리스트셀렉션 리스너
+		
 		Articles_clickon ac = new Articles_clickon(this);
+		
 		
 		table.setCellSelectionEnabled(true);
 		ListSelectionModel select = table.getSelectionModel();
 		select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		select.addListSelectionListener(ac);
-	} 
+	}
 	
 	class Articles_clickon implements ListSelectionListener{
 		//Field

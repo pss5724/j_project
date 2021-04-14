@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -82,8 +85,38 @@ public class boardUI_Write {
 			
 			main.jf.setVisible(true);
 			
-//			write_btn.addActionListener(new MainUIEvent(this));
-//			cancel_btn.addActionListener(new MainUIEvent(this));
+			write_btn.addActionListener(new Write_Action());
+			cancel_btn.addActionListener(new Write_Action());
+			
 		}
 		
+		
+		
+
+	class Write_Action implements ActionListener {
+
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object obj = e.getSource();
+			if(obj==write_btn) {	//글쓰기 버튼 눌렀을때
+				String write_ctg = (String)jcb.getSelectedItem();
+				String write_title = title_tf.getText();
+				String write_content = contents_ta.getText();
+				
+				if(write_title.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "제목을 입력해주세요.");
+				}else if(write_content.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "내용을 입력해주세요.");
+				}else {
+					main.system.writeArticle(write_ctg,write_title,write_content);
+				}
+			}else if(obj==cancel_btn) {		//취소 버튼 눌렀을때
+				new boardUI_Category(main);
+			}
+		}
+		
+		
+		
+	}
 }

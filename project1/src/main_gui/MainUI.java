@@ -9,15 +9,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main_system.HororogMgmSystem;
+import main_dao.MemberDAO;
+import main_system.MainSystem;
+import main_vo.MemberVO;
 
 public class MainUI {
 	//Field
-	public HororogMgmSystem system = new HororogMgmSystem();
+	MemberVO member;
+	MainSystem system;
+	MemberDAO mdao = new MemberDAO();
 	JFrame jf;
-	JPanel read_panel,write_panel,category_panel,content_panel,title_panel,btn_panel,top_panel,menu_panel, chat_panel, board_panel, mycontent_panel,
+	JPanel info_panel,read_panel,write_panel,category_panel,content_panel,title_panel,btn_panel,top_panel,menu_panel, chat_panel, board_panel, mycontent_panel,
 	search_panel, exit_panel, member_panel;
-	JLabel title;
+	JLabel title, info;
 	ArrayList<JButton> btnlist = new ArrayList<JButton>();
 	
 	
@@ -31,7 +35,9 @@ public class MainUI {
 	
 	
 	//Constructor
-	public MainUI() {
+	public MainUI(int memberNum, MainSystem system) {
+		this.member = mdao.getMemberInfo(memberNum);
+		this.system = system;
 		init();
 	}
 	
@@ -39,11 +45,13 @@ public class MainUI {
 	public void init() {
 		jf = new JFrame("호로록");
 		title = new JLabel("호로로록");
+		info = new JLabel(member.getId()+"님 환영합니다. 지역은 "+member.getLocation());
 		
-		top_panel = new JPanel(new GridLayout(2,1));
+		top_panel = new JPanel(new GridLayout(3,1));
 		content_panel = new JPanel();
 		category_panel = new JPanel();
 		title_panel = new JPanel();
+		info_panel = new JPanel();
 		btn_panel = new JPanel();
 		menu_panel = new JPanel();
 		chat_panel = new JPanel();
@@ -71,9 +79,12 @@ public class MainUI {
 		
 		menu_panel.add(btn_panel);
 		title_panel.add(title);
+		info_panel.add(info);
 		
+		top_panel.add(BorderLayout.NORTH, info_panel);
 		top_panel.add(BorderLayout.NORTH, title_panel);
 		top_panel.add(BorderLayout.NORTH, menu_panel);
+		
 		
 		content_panel.add(category_panel);
 		
