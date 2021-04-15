@@ -1,6 +1,8 @@
 package main_gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -85,7 +87,10 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		main.content_panel.add(main.board_panel);
 		main.jf.setVisible(true);
 		
-		write_btn.addActionListener(new MainUIEvent(main, this));
+//		write_btn.addActionListener(new MainUIEvent(main, this));
+		write_btn.addActionListener(new writeAction());
+		
+		
 		
 		//리스트셀렉션 리스너
 		
@@ -112,5 +117,17 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 			new boardUI_SelectOne(main, food_num, rownum).init();
 			
 		}
+	}
+	
+	class writeAction implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object obj = e.getSource();
+			if(obj==write_btn) {
+				new boardUI_Write(main);
+			}
+		}
+		
 	}
 }

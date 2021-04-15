@@ -34,8 +34,11 @@ public class MainUIEvent implements ActionListener{
 //						Commons.getMsg("로그인이 필요한 기능입니다"));
 //			}
 //		}else 
-			if(obj == main.btnlist.get(3)) {	//검색
+			
+		if(obj == main.btnlist.get(3)) {	//검색
 				new SearchUI(main);	
+		}else if(obj==main.btnlist.get(1)) {	//게시판 버튼 누르기
+				new boardUI_Category(main);
 			}
 //			if(true){
 //			}else {
