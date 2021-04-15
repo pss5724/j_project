@@ -32,7 +32,7 @@ public class LoginUIEvent extends WindowAdapter implements ActionListener{
 			if(obj == ui.login) {
 				login_proc();
 			}else if(obj == ui.join) {
-//				new JoinUI();
+				new JoinUI();
 			}
 		}
 		
@@ -65,7 +65,7 @@ public class LoginUIEvent extends WindowAdapter implements ActionListener{
 		
 		/** 윈도우 이벤트 처리 **/
 		public void	windowClosing(WindowEvent e) {
-			System.out.println("이벤트 객체- 프로그램 종료");
+			System.out.println("프로그램 종료");
 			System.exit(0);
 		}
 }

@@ -61,6 +61,36 @@ public class MemberDAO extends DBConn{
 		return mem;
 	}
 	
+	public boolean getJoinResult(MemberVO member) {
+		
+		
+		try {
+			String sql = " insert into ";
+			getPreparedStatement(sql);
+			
+			pstmt.setInt(1, memberNum);
+			
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberVO member = new MemberVO();
+				member.setMemberNum(rs.getInt(1));
+				member.setId(rs.getString(2));
+				member.setPass(rs.getString(3));
+				member.setName(rs.getString(4));
+				member.setHp(rs.getString(5));
+				member.setLocation(rs.getString(6));
+				
+				
+				mem = member;
+			}				
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mem;
+	}
 	
 	
 	

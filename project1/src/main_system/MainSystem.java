@@ -1,6 +1,7 @@
 package main_system;
 
 import main_dao.MemberDAO;
+import main_vo.MemberVO;
 
 public class MainSystem {
 	MemberDAO mdao = new MemberDAO();	
@@ -18,6 +19,11 @@ public class MainSystem {
 		/** 로그인 **/
 		public int loginCheck(String id, String pass) {
 			return mdao.getLoginResult(id, pass);
+		}
+		
+		/** 회원가입 **/
+		public boolean join(MemberVO member) {
+			return mdao.getLoginResult(member);
 		}
 	
 		/** 종료 **/

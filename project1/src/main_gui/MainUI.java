@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,7 +45,10 @@ public class MainUI {
 	//Method
 	public void init() {
 		jf = new JFrame("호로록");
-		title = new JLabel("호로로록");
+		
+		ImageIcon icon = new ImageIcon("images/title.png");
+		
+		title = new JLabel(icon);
 		info = new JLabel(member.getId()+"님 환영합니다. 지역은 "+member.getLocation());
 		
 		top_panel = new JPanel(new GridLayout(3,1));
@@ -128,9 +132,7 @@ public class MainUI {
 			mycontent_panel.setVisible(true);
 			break;
 		case SEARCH :
-			System.out.println("search 전");
 			search_panel.removeAll();
-			System.out.println("search 후");
 			search_panel.setVisible(true);
 			break;
 		case MEMBER :
