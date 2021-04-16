@@ -26,10 +26,12 @@ public class boardUI_Write {
 		TextArea contents_ta;
 		JComboBox jcb;
 		String[] category_list = {"중식","양식","일식","분식","한식"};
+		int food_num;
 		
 		//Constructor
-		public boardUI_Write(MainUI main) {
+		public boardUI_Write(MainUI main, int food_num) {
 			this.main = main;
+			this.food_num = food_num;
 			init();
 		}
 		
@@ -58,6 +60,7 @@ public class boardUI_Write {
 			
 //			select_tf = new JTextField(20);
 			jcb = new JComboBox(category_list);
+			jcb.setSelectedIndex(food_num-1);
 			title_tf = new JTextField(20);
 			contents_ta = new TextArea(3,30);
 

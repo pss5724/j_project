@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import main_vo.ArticleVO;
+import main_vo.BoardVO;
 
 public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
 	MainUI main;
@@ -31,13 +31,14 @@ public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
 		main.switch_panel(MainUI.BOARD);
 		main.board_panel.setLayout(new BorderLayout());
 		
-		ArticleVO vo = main.system.select_one(food_num, rownum);
+		BoardVO vo = main.system.select_one(food_num, rownum);
 		
 		title_l = new JLabel(vo.getTitle());
 		category_l = new JLabel(vo.getCategory());
-		writer_l = new JLabel(vo.getWriter());
+		writer_l = new JLabel(vo.getId());
 		date_l = new JLabel(vo.getDate());
 		contents_ta = new JTextArea(4,30);
+		contents_ta.setText(vo.getContent());
 		update_btn = new JButton("수정");
 		delete_btn = new JButton("삭제");
 		
