@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import main_vo.MemberVO;
+
 public class boardUI_Write {
 
 	
@@ -27,11 +29,14 @@ public class boardUI_Write {
 		JComboBox jcb;
 		String[] category_list = {"중식","양식","일식","분식","한식"};
 		int food_num;
+		MemberVO member = new MemberVO();
 		
 		//Constructor
 		public boardUI_Write(MainUI main, int food_num) {
 			this.main = main;
 			this.food_num = food_num;
+			this.member = main.member;
+			
 			init();
 		}
 		
@@ -112,7 +117,7 @@ public class boardUI_Write {
 				}else if(write_content.trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "내용을 입력해주세요.");
 				}else {
-					main.system.writeArticle(write_ctg,write_title,write_content);
+					main.system.writeArticle(member,write_ctg,write_title,write_content);
 				}
 			}else if(obj==cancel_btn) {		//취소 버튼 눌렀을때
 				new boardUI_Category(main);

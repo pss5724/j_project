@@ -2,6 +2,8 @@ package main_gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -98,7 +100,12 @@ public class MainUI {
 		jf.setSize(500,500);
 		jf.setVisible(true);
 		
-		
+		jf.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		
 	}
 	
