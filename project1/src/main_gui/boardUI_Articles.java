@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import main_vo.ArticleVO;
+import main_vo.BoardVO;
 
 public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 	MainUI main;
@@ -29,7 +29,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 	JTable table = new JTable(model);
 	JButton write_btn;
 	int food_num;
-	ArrayList<ArticleVO> articlelist;
+	ArrayList<BoardVO> boardlist;
 	
 	public boardUI_Articles(MainUI main, int num) {
 		this.main = main;
@@ -42,14 +42,14 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		inside_panel = new JPanel(new BorderLayout());
 		
 		model.setNumRows(0);
-		articlelist = main.system.select(food_num);
-		for(int i=0;i<articlelist.size();i++) {
+		boardlist = main.system.select(food_num);
+		for(int i=0;i<boardlist.size();i++) {
 			row = new Object[5];
-			row[0] = articlelist.get(i).getRownum();
-			row[1] = articlelist.get(i).getCategory();
-			row[2] = articlelist.get(i).getWriter();
-			row[3] = articlelist.get(i).getTitle();
-			row[4] = articlelist.get(i).getDate();
+			row[0] = i+1;
+			row[1] = boardlist.get(i).getCategory();
+			row[2] = boardlist.get(i).getId();
+			row[3] = boardlist.get(i).getTitle();
+			row[4] = boardlist.get(i).getDate();
 			model.addRow(row);
 		}
 		model.fireTableDataChanged();
@@ -125,7 +125,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			if(obj==write_btn) {
-				new boardUI_Write(main);
+				new boardUI_Write(main, food_num);
 			}
 		}
 		
