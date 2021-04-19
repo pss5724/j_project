@@ -63,33 +63,50 @@ public class MemberDAO extends DBConn{
 	
 	public boolean getJoinResult(MemberVO member) {
 		
-		
+		boolean result =false;
 		try {
-			String sql = " insert into ";
+			String sql = "insert into member values (SEQU_MEMBER_memberNUM.nextval, ?, ?, ? ,?,?)";
 			getPreparedStatement(sql);
 			
-			pstmt.setInt(1, memberNum);
+			member.setHp(member.getHp1()+"-"+member.getHp2()+"-"+member.getHp3());
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPass());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getHp());
+			pstmt.setString(5, member.getLocation());
 			
 			
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				MemberVO member = new MemberVO();
-				member.setMemberNum(rs.getInt(1));
-				member.setId(rs.getString(2));
-				member.setPass(rs.getString(3));
-				member.setName(rs.getString(4));
-				member.setHp(rs.getString(5));
-				member.setLocation(rs.getString(6));
-				
-				
-				mem = member;
-			}				
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return mem;
+		return result;
+	}
+	
+public boolean getCheckResult(String str) {
+		
+		boolean result =false;
+		try {
+			String sql = "select * from member where id=?";
+			getPreparedStatement(sql);
+			
+			
+			pstmt.setString(1, str);
+			
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	

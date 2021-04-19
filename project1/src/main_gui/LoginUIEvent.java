@@ -32,7 +32,7 @@ public class LoginUIEvent extends WindowAdapter implements ActionListener{
 			if(obj == ui.login) {
 				login_proc();
 			}else if(obj == ui.join) {
-				new JoinUI();
+				new JoinUI(system);
 			}
 		}
 		

@@ -23,7 +23,12 @@ public class MainSystem {
 		
 		/** 회원가입 **/
 		public boolean join(MemberVO member) {
-			return mdao.getLoginResult(member);
+			return mdao.getJoinResult(member);
+		}
+		
+		/** 중복체크 **/
+		public boolean check(String str) {
+			return mdao.getCheckResult(str);
 		}
 	
 		/** 종료 **/
