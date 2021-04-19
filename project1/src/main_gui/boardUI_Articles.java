@@ -87,7 +87,6 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		main.content_panel.add(main.board_panel);
 		main.jf.setVisible(true);
 		
-//		write_btn.addActionListener(new MainUIEvent(main, this));
 		write_btn.addActionListener(new writeAction());
 		
 		

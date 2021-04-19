@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBConn {
 		String url ="jdbc:oracle:thin:@127.0.0.1:1521";
@@ -12,6 +13,7 @@ public class DBConn {
 		Connection conn;
 		PreparedStatement pstmt;
 		ResultSet rs;
+		Statement stmt;
 		
 		public DBConn() {
 			try {
@@ -35,6 +37,15 @@ public class DBConn {
 			}
 		}
 		
+		/** Statement 생성 **/
+		public void getStatement() {
+			try {
+				stmt = conn.createStatement();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		/** 종료 **/
 		public void close() {
