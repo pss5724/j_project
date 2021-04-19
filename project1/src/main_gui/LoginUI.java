@@ -52,7 +52,7 @@ public class LoginUI{
 		tf_panel.add(id_tf);	tf_panel.add(pass_tf);
 		
 		login = new JButton("로그인");
-		join = new JButton("회원가입");
+		join = new JButton("회원가입"); 
 		btn_panel.add(login);	btn_panel.add(join);
 		
 		jf.add(BorderLayout.NORTH, img_label);

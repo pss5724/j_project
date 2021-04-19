@@ -35,7 +35,7 @@ public class LoginUIEvent extends WindowAdapter implements ActionListener{
 				new JoinUI(system);
 			}
 		}
-		
+		 
 
 		public void login_proc() {
 			if(ui.id_tf.getText().equals("")) {

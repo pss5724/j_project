@@ -96,8 +96,8 @@ public class JoinUI {
 				bg.add(rb6);
 				bg.add(rb7);
 
-				t_panel.add(rb1);
-				t_panel.add(rb2);
+				t_panel.add(rb1); 
+				t_panel.add(rb2); 
 				t_panel.add(rb3);
 				t_panel.add(rb4);
 				t_panel.add(rb5);

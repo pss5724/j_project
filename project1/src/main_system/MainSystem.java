@@ -3,7 +3,7 @@ package main_system;
 import java.util.ArrayList;
 
 import main_dao.BoardDAO;
-import main_dao.MemberDAO;
+import main_dao.MemberDAO; 
 import main_vo.BoardVO;
 import main_vo.MemberVO;
 

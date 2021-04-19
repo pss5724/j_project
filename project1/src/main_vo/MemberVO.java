@@ -2,7 +2,7 @@ package main_vo;
 
 public class MemberVO {
 	int memberNum;
-	String id,pass,name,hp,hp1,hp2,hp3,location;
+	String id,pass,name,hp,hp1,hp2,hp3,location; 
 	
 	
 	

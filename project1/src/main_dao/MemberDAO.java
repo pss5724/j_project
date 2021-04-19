@@ -12,7 +12,7 @@ public class MemberDAO extends DBConn{
 					" WHERE id=? AND pass=?";
 			getPreparedStatement(sql);
 			
-			pstmt.setString(1, id);
+			pstmt.setString(1, id); 
 			pstmt.setString(2, pass);
 			
 			rs = pstmt.executeQuery();
