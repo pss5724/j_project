@@ -1,13 +1,12 @@
 package main_gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,6 +26,8 @@ public class SearchUI implements ActionListener{
 	DefaultTableModel model;	
 	JTable table;
 	Panel search_content_panel;
+	ArrayList<BoardVO> content;
+	String title;
 
 	
 	//Consturctor
@@ -72,18 +73,24 @@ public class SearchUI implements ActionListener{
 	}
 	
 	//table의 데이터
-	public void createJtableData(BoardVO content) {
+	public void createJtableData(ArrayList<BoardVO> content) {
 		model = new DefaultTableModel(colNames, 0);
 		table = new JTable(model);
 		
 		model.setNumRows(0);
-		row[0] = content.getContentnum();
-		row[1] = content.getCategory();
-		row[2] = content.getId();
-		row[3] = content.getTitle();
-		row[4] = content.getDate();
+		title = tf_search.getText();
+		content = main.system.search(title);
+		for(int i=0; i<content.size(); i++) {
+			row = new Object[5];
+			
+			row[0] = content.get(i).getContentnum();
+			row[1] = content.get(i).getCategory();
+			row[2] = content.get(i).getId();
+			row[3] = content.get(i).getTitle();
+			row[4] = content.get(i).getDate();
+			model.addRow(row);
+		}
 		
-		model.addRow(row);
 		model.fireTableDataChanged();
 		table.setModel(model);
 		
@@ -97,30 +104,29 @@ public class SearchUI implements ActionListener{
 			
 		}else {
 			//검색
-			BoardVO content = main.system.search(tf_search.getText());
-			
-			if(content.getContentnum() != 0) {
+				
+//			if(content[0].getContentnum() != 0) {
 				createJtableData(content);
 				model.setColumnIdentifiers(colNames);
 				table.setRowHeight(20);
 				table.setAutoCreateRowSorter(false);
 				
 				TableColumnModel tcm = table.getColumnModel();
-				table.getColumn("no").setPreferredWidth(3);
-				table.getColumn("카테고리").setPreferredWidth(5);
-				table.getColumn("작성자").setPreferredWidth(5);
-				table.getColumn("제목").setPreferredWidth(10);
-				table.getColumn("등록일").setPreferredWidth(5);
+				table.getColumn("no").setPreferredWidth(20);
+				table.getColumn("카테고리").setPreferredWidth(60);
+				table.getColumn("작성자").setPreferredWidth(50);
+				table.getColumn("제목").setPreferredWidth(200);
+				table.getColumn("등록일").setPreferredWidth(100);
 				
 				JScrollPane pane = new JScrollPane(table);
 				search_content_panel.add(BorderLayout.CENTER, pane);
 				main.jf.setVisible(true);
 				
-			}else {
-				JOptionPane.showMessageDialog(null,
-						Commons.getMsg("검색된 데이터가 존재하지 않습니다."));
-				
-			}
+//			}else {
+//				JOptionPane.showMessageDialog(null,
+//						Commons.getMsg("검색된 데이터가 존재하지 않습니다."));
+//				
+//			}
 		}
 	}//proc
 }

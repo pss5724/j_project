@@ -60,4 +60,17 @@ public class MainSystem {
 			dao.writeArticle(member, ctg,title,contents);
 		}
 		
+		/** 검색 **/
+		public ArrayList<BoardVO> search(String title) {
+			ArrayList<BoardVO> boardlist = new ArrayList<BoardVO>();
+			boardlist = dao.getSelectResult(title);
+			return boardlist;
+		}
+		
+		/** 내글 검색 **/
+		public ArrayList<BoardVO> mycontent_search(String id) {
+			ArrayList<BoardVO> boardlist = new ArrayList<BoardVO>();
+			boardlist = dao.getmySelectResult();
+			return boardlist;
+		}
 }

@@ -11,23 +11,26 @@ public class BoardDAO extends DBConn{
 	
 	//지원 작성 부분
 	/** 검색 **/
-	public BoardVO getSelectResult(String title) {
-		BoardVO content = new BoardVO();
+	public ArrayList<BoardVO> getSelectResult(String title) {
+		ArrayList<BoardVO> content = new ArrayList<BoardVO>();
 		try {
 			String sql = " select contentNum, category, id, title, content_date "
 					+ " from content "
-					+ " where title like ?";
+					+ " where title like ?"
+					+ " order by content_date ";
 			getPreparedStatement(sql);
 			pstmt.setString(1, '%'+title+'%');	//?에 title 집어넣기
-//			pstmt = conn.prepareStatement(sql + "'%" + title + "%'");	//'안의 것을 갖는 행만 읽기'
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				content.setContentnum(rs.getInt(1));
-				content.setCategory(rs.getString(2	));
-				content.setId(rs.getString(3));
-				content.setTitle(rs.getString(4));
-				content.setDate(rs.getString(5));
+				BoardVO board = new BoardVO();
+				board.setContentnum(rs.getInt(1));
+				board.setCategory(rs.getString(2));
+				board.setId(rs.getString(3));
+				board.setTitle(rs.getString(4));
+				board.setDate(rs.getString(5));
+				
+				content.add(board);
 			}
 			
 		} catch (Exception e) {
@@ -39,34 +42,43 @@ public class BoardDAO extends DBConn{
 	}
 	
 	/** 내글 검색 **/
-	public BoardDAO getmySelectResult(String name) {
-		BoardDAO hororog = new BoardDAO();
+	public ArrayList<BoardVO> getmySelectResult(){
+		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
+		MemberVO memeber = new MemberVO();
+		
 		try {
-			String sql = " select foodno, foodcategory, writter, title, hiredate "
-					+ " from hororog "
-					+ " where title=?";
+			String sql = " select contentNum, category, id, title, content_date "
+					+ " from content "
+					+ " where id = ? "
+					+ " order by content_date ";
 			getPreparedStatement(sql);
-			pstmt.setString(1, name);
+			//id 넣어야함
+//			pstmt.setString(1, id);
+			String admin = "admin";	//test용
+			pstmt.setString(1, admin);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-//				hororog.setNo(rs.getInt(1));
-//				hororog.setCategory(rs.getString(2));
-//				hororog.setWrittenby(rs.getString(3));
-//				hororog.setTitle(rs.getString(4));
-//				hororog.setHiredate(rs.getDate(5));
+				BoardVO board = new BoardVO();
+				board.setContentnum(rs.getInt(1));
+				board.setCategory(rs.getString(2));
+				board.setId(rs.getString(3));
+				board.setTitle(rs.getString(4));
+				board.setDate(rs.getString(5));
 				
+				list.add(board);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
-			
 		}
 		
-		return hororog;
+		return list;
 	}
 	
 	/** 수정 **/
+	
+	/** 삭제 **/
+	
 	
 	
 	
