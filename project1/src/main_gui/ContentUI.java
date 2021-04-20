@@ -10,7 +10,7 @@ import javax.swing.JTextArea;
 
 import main_vo.BoardVO;
 
-public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
+public class ContentUI {	//게시물 눌렀을때 특정게시물
 	MainUI main;
 	JLabel category_l, title_l, writer_l, date_l;
 	int food_num, rownum;
@@ -20,7 +20,7 @@ public class boardUI_SelectOne {	//게시물 눌렀을때 특정게시물
 	JButton update_btn,delete_btn;
 	JTextArea contents_ta;
 	
-	public boardUI_SelectOne(MainUI main, int food_num, int rownum) {
+	public ContentUI(MainUI main, int food_num, int rownum) {
 		this.main = main;
 		this.rownum = rownum;
 		this.food_num = food_num;

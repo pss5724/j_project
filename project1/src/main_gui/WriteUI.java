@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import main_vo.MemberVO;
 
-public class boardUI_Write {
+public class WriteUI {
 
 	
 	//Field
@@ -32,7 +32,7 @@ public class boardUI_Write {
 		MemberVO member = new MemberVO();
 		
 		//Constructor
-		public boardUI_Write(MainUI main, int food_num) {
+		public WriteUI(MainUI main, int food_num) {
 			this.main = main;
 			this.food_num = food_num;
 			this.member = main.member;
@@ -117,10 +117,13 @@ public class boardUI_Write {
 				}else if(write_content.trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "내용을 입력해주세요.");
 				}else {
-					main.system.writeArticle(member,write_ctg,write_title,write_content);
+					if(main.system.writeArticle(member,write_ctg,write_title,write_content)){
+						JOptionPane.showMessageDialog(null, "게시글이 등록되었습니다.");
+						new BoardUI(main,food_num);
+					}
 				}
 			}else if(obj==cancel_btn) {		//취소 버튼 눌렀을때
-				new boardUI_Category(main);
+				new CategoryUI(main);
 			}
 		}
 		

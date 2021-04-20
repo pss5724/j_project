@@ -3,7 +3,7 @@ package main_dao;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-import main_gui.boardUI_Category;
+import main_gui.CategoryUI;
 import main_vo.BoardVO;
 import main_vo.MemberVO;
 
@@ -95,22 +95,22 @@ public class BoardDAO extends DBConn{
 		//각 카테고리별 sql 작성
 		try {
 		switch(food_num) {
-		case boardUI_Category.ALL_FOOD:
+		case CategoryUI.ALL_FOOD:
 			pstmt.setString(1,"전체");
 			break;
-		case boardUI_Category.CHINA_FOOD:
+		case CategoryUI.CHINA_FOOD:
 			pstmt.setString(1,"중식");
 			break;
-		case boardUI_Category.WEST_FOOD:
+		case CategoryUI.WEST_FOOD:
 			pstmt.setString(1,"양식");
 			break;
-		case boardUI_Category.JAPAN_FOOD:
+		case CategoryUI.JAPAN_FOOD:
 			pstmt.setString(1,"일식");
 			break;
-		case boardUI_Category.BOONSIK:
+		case CategoryUI.BOONSIK:
 			pstmt.setString(1,"분식");
 			break;
-		case boardUI_Category.KOREA_FOOD:
+		case CategoryUI.KOREA_FOOD:
 			pstmt.setString(1,"한식");
 			break;
 		}
@@ -153,22 +153,22 @@ public class BoardDAO extends DBConn{
 		//각 카테고리별 sql 작성
 				try {
 				switch(food_num) {
-				case boardUI_Category.ALL_FOOD:
+				case CategoryUI.ALL_FOOD:
 					pstmt.setString(1,"전체");
 					break;
-				case boardUI_Category.CHINA_FOOD:
+				case CategoryUI.CHINA_FOOD:
 					pstmt.setString(1,"중식");
 					break;
-				case boardUI_Category.WEST_FOOD:
+				case CategoryUI.WEST_FOOD:
 					pstmt.setString(1,"양식");
 					break;
-				case boardUI_Category.JAPAN_FOOD:
+				case CategoryUI.JAPAN_FOOD:
 					pstmt.setString(1,"일식");
 					break;
-				case boardUI_Category.BOONSIK:
+				case CategoryUI.BOONSIK:
 					pstmt.setString(1,"분식");
 					break;
-				case boardUI_Category.KOREA_FOOD:
+				case CategoryUI.KOREA_FOOD:
 					pstmt.setString(1,"한식");
 					break;
 				}
@@ -194,8 +194,9 @@ public class BoardDAO extends DBConn{
 	
 	
 	/** 게시글 작성 **/
-	public void writeArticle(MemberVO member, String ctg, String title, String contents) {
+	public int writeArticle(MemberVO member, String ctg, String title, String contents) {
 		//글쓰기 sql. member, 카테고리, 제목, 내용 받아옴
+		int result = 0;
 		String sql = " INSERT INTO CONTENT " + 
 				"VALUES(SEQU_CONTENT_contentNum.NEXTVAL, ?, ?, ?, " + 
 				"?, SYSDATE, ?) ";
@@ -208,10 +209,13 @@ public class BoardDAO extends DBConn{
 			pstmt.setString(4, contents);
 			pstmt.setString(5, member.getLocation());
 			
+			result = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		return result;
 	}
 	
 	public void close() {

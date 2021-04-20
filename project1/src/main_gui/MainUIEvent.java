@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import main_system.HororogMgmSystem;
 
 public class MainUIEvent implements ActionListener{
 	MainUI main;
@@ -38,8 +37,10 @@ public class MainUIEvent implements ActionListener{
 		if(obj == main.btnlist.get(3)) {	//검색
 				new SearchUI(main);	
 		}else if(obj==main.btnlist.get(1)) {	//게시판 버튼 누르기
-				new boardUI_Category(main);
-			}
+				new CategoryUI(main);
+		}else if(obj==main.btnlist.get(0)) {	//채팅
+			new ChatUI(main.member);
+		}
 //			if(true){
 //			}else {
 //				JOptionPane.showMessageDialog(null,

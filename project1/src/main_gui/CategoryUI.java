@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 //°Ô½ÃÆÇ
 
 
-public class boardUI_Category {
+public class CategoryUI {
 	MainUI main;
 	JButton all_food,china_food,west_food,japan_food,
 	korea_food,boonsik;
@@ -26,7 +26,7 @@ public class boardUI_Category {
 	public static final int KOREA_FOOD=5;
 	
 	
-	public boardUI_Category(MainUI main) {
+	public CategoryUI(MainUI main) {
 		this.main = main;
 		init();
 	}
@@ -52,9 +52,6 @@ public class boardUI_Category {
 		
 		for(JButton btn: btnlist) {
 			btn.setSize(300, 300);
-//			button_panel = new JPanel();
-//			button_panel.add(btn);
-//			main.board_panel.add(button_panel);
 			main.board_panel.add(btn);
 			btn.addActionListener(new ctgAction());
 		}
@@ -70,18 +67,18 @@ public class boardUI_Category {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object obj = e.getSource();
-			if(obj == btnlist.get(boardUI_Category.ALL_FOOD)) {
-				new boardUI_Articles(main, boardUI_Category.ALL_FOOD);
-			}else if(obj == btnlist.get(boardUI_Category.CHINA_FOOD)) {
-				new boardUI_Articles(main, boardUI_Category.CHINA_FOOD);
-			}else if(obj == btnlist.get(boardUI_Category.WEST_FOOD)) {
-				new boardUI_Articles(main, boardUI_Category.WEST_FOOD);
-			}else if(obj == btnlist.get(boardUI_Category.JAPAN_FOOD)) {
-				new boardUI_Articles(main, boardUI_Category.JAPAN_FOOD);
-			}else if(obj == btnlist.get(boardUI_Category.BOONSIK)) {
-				new boardUI_Articles(main, boardUI_Category.BOONSIK);
-			}else if(obj == btnlist.get(boardUI_Category.KOREA_FOOD)) {
-				new boardUI_Articles(main, boardUI_Category.KOREA_FOOD);
+			if(obj == btnlist.get(CategoryUI.ALL_FOOD)) {
+				new BoardUI(main, CategoryUI.ALL_FOOD);
+			}else if(obj == btnlist.get(CategoryUI.CHINA_FOOD)) {
+				new BoardUI(main, CategoryUI.CHINA_FOOD);
+			}else if(obj == btnlist.get(CategoryUI.WEST_FOOD)) {
+				new BoardUI(main, CategoryUI.WEST_FOOD);
+			}else if(obj == btnlist.get(CategoryUI.JAPAN_FOOD)) {
+				new BoardUI(main, CategoryUI.JAPAN_FOOD);
+			}else if(obj == btnlist.get(CategoryUI.BOONSIK)) {
+				new BoardUI(main, CategoryUI.BOONSIK);
+			}else if(obj == btnlist.get(CategoryUI.KOREA_FOOD)) {
+				new BoardUI(main, CategoryUI.KOREA_FOOD);
 			}
 		}
 	}

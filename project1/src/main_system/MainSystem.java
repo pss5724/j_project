@@ -56,8 +56,12 @@ public class MainSystem {
 		}
 		
 		/** 게시물 작성 **/
-		public void writeArticle(MemberVO member, String ctg, String title, String contents) {
-			dao.writeArticle(member, ctg,title,contents);
+		public boolean writeArticle(MemberVO member, String ctg, String title, String contents) {
+			boolean check = false;
+			if(dao.writeArticle(member, ctg,title,contents)!=0) {
+				check = true;
+			}
+			return check;
 		}
 		
 		/** 검색 **/

@@ -19,7 +19,7 @@ import javax.swing.table.TableColumnModel;
 
 import main_vo.BoardVO;
 
-public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
+public class BoardUI {	//카테고리 눌렀을때 게시물들
 	MainUI main;
 	JPanel inside_panel;
 	JPanel buttonpanel;
@@ -31,7 +31,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 	int food_num;
 	ArrayList<BoardVO> boardlist;
 	
-	public boardUI_Articles(MainUI main, int num) {
+	public BoardUI(MainUI main, int num) {
 		this.main = main;
 		food_num=num;
 		init();
@@ -104,16 +104,16 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 	
 	class Articles_clickon implements ListSelectionListener{
 		//Field
-		boardUI_Articles ba;
+		BoardUI ba;
 		
 		//Constructor
-		public Articles_clickon(boardUI_Articles ba) {
+		public Articles_clickon(BoardUI ba) {
 			this.ba=ba;
 		}
 		//Method
 		public void	valueChanged(ListSelectionEvent e) {
 			int rownum = table.getSelectedRow();
-			new boardUI_SelectOne(main, food_num, rownum).init();
+			new ContentUI(main, food_num, rownum).init();
 			
 		}
 	}
@@ -124,7 +124,7 @@ public class boardUI_Articles {	//카테고리 눌렀을때 게시물들
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			if(obj==write_btn) {
-				new boardUI_Write(main, food_num);
+				new WriteUI(main, food_num);
 			}
 		}
 		

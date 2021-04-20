@@ -41,6 +41,7 @@ public class MainUI {
 	public MainUI(int memberNum, MainSystem system) {
 		this.member = mdao.getMemberInfo(memberNum);
 		this.system = system;
+		new ChatServer();
 		init();
 	}
 	
