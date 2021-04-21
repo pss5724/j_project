@@ -77,4 +77,11 @@ public class MainSystem {
 			boardlist = dao.getmySelectResult();
 			return boardlist;
 		}
+		
+		/** 특정 게시물 클릭시 조회 -지원씀**/
+		public BoardVO select_one(int rownum) {
+			BoardVO vo = new BoardVO();
+			vo = dao.SelectOneResult(rownum);
+			return vo;
+		}
 }

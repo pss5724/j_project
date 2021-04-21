@@ -42,7 +42,7 @@ public class BoardDAO extends DBConn{
 	}
 	
 	/** 내글 검색 **/
-	public ArrayList<BoardVO> getmySelectResult(){
+	public ArrayList<BoardVO> getmySelectResult(String id){
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		MemberVO memeber = new MemberVO();
 		
@@ -52,10 +52,7 @@ public class BoardDAO extends DBConn{
 					+ " where id = ? "
 					+ " order by content_date ";
 			getPreparedStatement(sql);
-			//id 넣어야함
-//			pstmt.setString(1, id);
-			String admin = "admin";	//test용
-			pstmt.setString(1, admin);
+			pstmt.setString(1, id);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -73,6 +70,34 @@ public class BoardDAO extends DBConn{
 		}
 		
 		return list;
+	}
+	
+	/** 내게시물 하나 조회 **/
+	public BoardVO SelectOneResult(int rownum) {
+		BoardVO board = new BoardVO();
+		
+		try {
+			String sql = " select title, id, category, content_date, content "
+					+ " from content "
+					+ " where contentnum = ? "
+					+ " order by content_date ";
+			getPreparedStatement(sql);
+			pstmt.setInt(1, rownum);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			board.setTitle(rs.getString(1));
+			board.setId(rs.getString(2));
+			board.setCategory(rs.getString(3));
+			board.setDate(rs.getString(4));
+			board.setContent(rs.getString(5));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return board;
+		
 	}
 	
 	/** 수정 **/
