@@ -26,7 +26,8 @@ public class MainUI {
 	search_panel, exit_panel, member_panel;
 	JLabel title, info;
 	ArrayList<JButton> btnlist = new ArrayList<JButton>();
-	
+	JButton logout;
+
 	
 	
 	public static final int BOARD = 1;	//게시판
@@ -41,7 +42,6 @@ public class MainUI {
 	public MainUI(int memberNum, MainSystem system) {
 		this.member = mdao.getMemberInfo(memberNum);
 		this.system = system;
-		new ChatServer();
 		init();
 	}
 	
@@ -53,7 +53,8 @@ public class MainUI {
 		
 		title = new JLabel(icon);
 		info = new JLabel(member.getId()+"님 환영합니다. 지역은 "+member.getLocation());
-		
+		logout = new JButton("로그아웃");
+
 		top_panel = new JPanel(new GridLayout(3,1));
 		content_panel = new JPanel();
 		category_panel = new JPanel();
@@ -87,6 +88,8 @@ public class MainUI {
 		menu_panel.add(btn_panel);
 		title_panel.add(title);
 		info_panel.add(info);
+		info_panel.add(logout);
+
 		
 		top_panel.add(BorderLayout.NORTH, info_panel);
 		top_panel.add(BorderLayout.NORTH, title_panel);
@@ -107,6 +110,9 @@ public class MainUI {
 				System.exit(0);
 			}
 		});
+		
+		logout.addActionListener(new MainUIEvent(this));	
+
 		
 	}
 	

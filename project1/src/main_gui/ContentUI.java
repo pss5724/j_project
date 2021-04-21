@@ -2,12 +2,15 @@ package main_gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import main_gui.ContentUI.ContentAction;
 import main_vo.BoardVO;
 
 public class ContentUI {	//게시물 눌렀을때 특정게시물
@@ -57,6 +60,12 @@ public class ContentUI {	//게시물 눌렀을때 특정게시물
 		button_panel.add(update_btn);
 		button_panel.add(delete_btn);
 		
+		button_panel.setVisible(false);
+		
+		if(vo.getId().equals(main.member.getId()) || main.member.getId().equals("admin")) {
+			button_panel.setVisible(true);
+		}
+		
 		above_panel.add(writer_panel);
 		above_panel.add(category_panel);
 		above_panel.add(date_panel);
@@ -70,6 +79,22 @@ public class ContentUI {	//게시물 눌렀을때 특정게시물
 		main.board_panel.add(BorderLayout.SOUTH,button_panel);
 		main.content_panel.add(main.board_panel);
 		main.jf.setVisible(true);
+		
+		update_btn.addActionListener(new ContentAction());
+		delete_btn.addActionListener(new ContentAction());
 	}
 	
+	class ContentAction implements ActionListener{	//수정,삭제 리스너 연결하는 이너클래스.
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object obj = e.getSource();
+			if(obj==update_btn) {
+				//수정 버튼 눌렀을 때
+			}else if(obj==delete_btn) {
+				//삭제 버튼 눌렀을 때
+			}
+		}
+		
+	}
 }

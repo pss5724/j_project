@@ -40,6 +40,11 @@ public class MainUIEvent implements ActionListener{
 				new CategoryUI(main);
 		}else if(obj==main.btnlist.get(0)) {	//채팅
 			new ChatUI(main.member);
+		}else if(obj==main.logout) {	//로그아웃
+			if(JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?")==JOptionPane.OK_OPTION) {
+				main.jf.setVisible(false);
+				new LoginUI();
+			}
 		}
 //			if(true){
 //			}else {

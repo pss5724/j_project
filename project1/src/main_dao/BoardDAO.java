@@ -87,35 +87,41 @@ public class BoardDAO extends DBConn{
 	/** 전체 조회 **/
 	public ArrayList<BoardVO> SelectResult(int food_num) {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
-		String sql = " SELECT CATEGORY,ID,TITLE,CONTENT,CONTENT_DATE FROM CONTENT " + 
-				" WHERE CATEGORY = ? " + 
-				" ORDER BY CONTENT_DATE DESC ";
-		getPreparedStatement(sql);
+		if(food_num==CategoryUI.ALL_FOOD) {	//카테고리가 전체일 경우
+			String sql = " SELECT CATEGORY,ID,TITLE,CONTENT,CONTENT_DATE FROM CONTENT " + 
+					" WHERE CATEGORY = '중식' OR CATEGORY = '양식' OR CATEGORY = '일식' " + 
+					" OR CATEGORY = '분식' OR CATEGORY = '한식' ORDER BY CONTENT_DATE DESC ";
+			getPreparedStatement(sql);
+			
+		}else {	//카테고리가 전체가 아닐 경우
 		
-		//각 카테고리별 sql 작성
-		try {
-		switch(food_num) {
-		case CategoryUI.ALL_FOOD:
-			pstmt.setString(1,"전체");
-			break;
-		case CategoryUI.CHINA_FOOD:
-			pstmt.setString(1,"중식");
-			break;
-		case CategoryUI.WEST_FOOD:
-			pstmt.setString(1,"양식");
-			break;
-		case CategoryUI.JAPAN_FOOD:
-			pstmt.setString(1,"일식");
-			break;
-		case CategoryUI.BOONSIK:
-			pstmt.setString(1,"분식");
-			break;
-		case CategoryUI.KOREA_FOOD:
-			pstmt.setString(1,"한식");
-			break;
-		}
-		} catch (Exception e) {
-			e.printStackTrace();
+			String sql = " SELECT CATEGORY,ID,TITLE,CONTENT,CONTENT_DATE FROM CONTENT " + 
+					" WHERE CATEGORY = ? " + 
+					" ORDER BY CONTENT_DATE DESC ";
+			getPreparedStatement(sql);
+			
+			//각 카테고리별 sql 작성
+			try {
+			switch(food_num) {
+			case CategoryUI.CHINA_FOOD:
+				pstmt.setString(1,"중식");
+				break;
+			case CategoryUI.WEST_FOOD:
+				pstmt.setString(1,"양식");
+				break;
+			case CategoryUI.JAPAN_FOOD:
+				pstmt.setString(1,"일식");
+				break;
+			case CategoryUI.BOONSIK:
+				pstmt.setString(1,"분식");
+				break;
+			case CategoryUI.KOREA_FOOD:
+				pstmt.setString(1,"한식");
+				break;
+			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		//sql 적용, 데이터 가져오기
