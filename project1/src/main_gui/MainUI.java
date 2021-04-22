@@ -22,8 +22,9 @@ public class MainUI {
 	MainSystem system;
 	MemberDAO mdao = new MemberDAO();
 	JFrame jf;
+	//
 	JPanel info_panel,read_panel,write_panel,category_panel,content_panel,title_panel,btn_panel,top_panel,menu_panel, chat_panel, board_panel, mycontent_panel,
-	search_panel, exit_panel, member_panel;
+	search_panel, exit_panel, member_panel, update_panel;
 	JLabel title, info;
 	ArrayList<JButton> btnlist = new ArrayList<JButton>();
 	JButton logout;

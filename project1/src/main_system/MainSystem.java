@@ -74,14 +74,24 @@ public class MainSystem {
 		/** 내글 검색 **/
 		public ArrayList<BoardVO> mycontent_search(String id) {
 			ArrayList<BoardVO> boardlist = new ArrayList<BoardVO>();
-			boardlist = dao.getmySelectResult();
+			boardlist = dao.getmySelectResult(id);
 			return boardlist;
 		}
 		
-		/** 특정 게시물 클릭시 조회 -지원씀**/
+		/** 특정 게시물 클릭시 조회 -지원씀 **/
 		public BoardVO select_one(int rownum) {
 			BoardVO vo = new BoardVO();
 			vo = dao.SelectOneResult(rownum);
 			return vo;
+		}
+		
+		/** 내글 수정 **/
+		public void mycontent_update(String title, String content, int rownum) {
+			dao.mycontent_update(title, content, rownum);
+		}
+		
+		/** 내글 삭제 **/
+		public void mycontent_delete(int rownum) {
+			dao.mycontent_delete(rownum);
 		}
 }

@@ -101,8 +101,40 @@ public class BoardDAO extends DBConn{
 	}
 	
 	/** 수정 **/
+	public void mycontent_update(String title, String content, int rownum) {
+		try {
+			String sql = " update content set title = ?, "
+					+ " content = ? "
+					+ " where contentnum = ? ";
+			getPreparedStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, rownum);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	/** 삭제 **/
+	public void mycontent_delete(int rownum) {
+		try {
+			String sql = " delete from content where contentnum = ? ";
+			getPreparedStatement(sql);
+			pstmt.setInt(1, rownum);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	
