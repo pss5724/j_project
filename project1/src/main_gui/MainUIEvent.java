@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 
+
 public class MainUIEvent implements ActionListener{
 	MainUI main;
 	
@@ -45,7 +46,27 @@ public class MainUIEvent implements ActionListener{
 				main.jf.setVisible(false);
 				new LoginUI();
 			}
+		}	else if(obj == main.btnlist.get(5)) {	//종료
+			int result = JOptionPane.showConfirmDialog(null,
+					Commons.getMsg("정말로 종료하시겠습니까?"));
+			if(result ==0) {
+				main.system.close();
+				System.exit(0);
+			}
 		}
+			else if(obj == main.btnlist.get(4)) {
+				if(main.btnlist.get(4).getText().equals("회원관리")) {
+					if(main.member.getId().equals("admin")){
+						new MemberManagementUI(main);				
+					}else {
+						JOptionPane.showMessageDialog(null,
+								Commons.getMsg("관리자만 접근 가능합니다"));
+					}
+				}else {
+					new MyUI(main);
+				}
+				
+			}
 //			if(true){
 //			}else {
 //				JOptionPane.showMessageDialog(null,

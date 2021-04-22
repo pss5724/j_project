@@ -35,6 +35,37 @@ public class MainSystem {
 			return mdao.getCheckResult(str);
 		}
 	
+		/** 중복체크 **/
+		public ArrayList<MemberVO> getMemberList() {
+			ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+			list = mdao.getMemberResult();
+			return list;
+		}
+		
+		/** 중복체크 **/
+		public boolean memberUpdate(MemberVO member, String id) {
+			
+			return mdao.getUpdateResult(member, id);
+		}
+		
+		/** 중복체크 **/
+		public boolean memberDelete(String id) {
+			
+			return mdao.getDeleteResult(id);
+		}
+		
+		/** 회원 조회 **/
+		public MemberVO memberSearch(String id) {
+			
+			return mdao.getSearchResult(id);
+		}
+		
+		/** 회원 조회 **/
+		public MemberVO getMemberInfo(String id) {
+			
+			return mdao.getMemberInfo(id);
+		}
+		
 		/** 종료 **/
 		public void close() {
 			mdao.close();
