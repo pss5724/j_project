@@ -3,7 +3,6 @@ package main_gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import main_vo.MemberVO;
@@ -25,7 +25,7 @@ public class WriteUI {
 		JPanel label_panel, tf_panel_1, tf_panel_2, ta_panel, btn_panel, contents_panel;
 		JButton write_btn,cancel_btn;
 		JTextField title_tf; //, select_tf;
-		TextArea contents_ta;
+		JTextArea contents_ta;
 		JComboBox jcb;
 		String[] category_list = {"중식","양식","일식","분식","한식"};
 		int food_num;
@@ -67,7 +67,8 @@ public class WriteUI {
 			jcb = new JComboBox(category_list);
 			jcb.setSelectedIndex(food_num-1);
 			title_tf = new JTextField(20);
-			contents_ta = new TextArea(3,30);
+			contents_ta = new JTextArea(3,30);
+			contents_ta.setLineWrap(true);
 
 			write_btn = new JButton("글쓰기");
 			cancel_btn = new JButton("취소");

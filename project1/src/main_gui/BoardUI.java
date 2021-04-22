@@ -93,7 +93,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		
 		//리스트셀렉션 리스너
 		
-		Articles_clickon ac = new Articles_clickon(this);
+		Articles_clickon ac = new Articles_clickon();
 		
 		
 		table.setCellSelectionEnabled(true);
@@ -103,13 +103,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 	}
 	
 	class Articles_clickon implements ListSelectionListener{
-		//Field
-		BoardUI ba;
 		
-		//Constructor
-		public Articles_clickon(BoardUI ba) {
-			this.ba=ba;
-		}
 		//Method
 		public void	valueChanged(ListSelectionEvent e) {
 			int rownum = table.getSelectedRow();

@@ -12,6 +12,17 @@ public class Commons {
 		return font;
 	}
 	
+	public static Font getContentFont() {
+		Font font = new Font("¸¼Àº °íµñ", Font.PLAIN, 12);
+		return font;
+	}
+	
+	
+	public static Font getTitleFont() {
+		Font font = new Font("¸¼Àº °íµñ", Font.BOLD, 14);
+		return font;
+	}
+	
 	public static JButton getJButton(String name) {
 		Font font = new Font("¸¼Àº °íµñ", Font.BOLD, 14);
 		JButton button = new JButton(name);

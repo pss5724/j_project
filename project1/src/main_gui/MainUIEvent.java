@@ -43,7 +43,8 @@ public class MainUIEvent implements ActionListener{
 			new ChatUI(main.member);
 		}else if(obj==main.logout) {	//로그아웃
 			if(JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?")==JOptionPane.OK_OPTION) {
-				main.jf.setVisible(false);
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				main.jf.dispose();
 				new LoginUI();
 			}
 		}	else if(obj == main.btnlist.get(5)) {	//종료

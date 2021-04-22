@@ -108,7 +108,7 @@ public class MainUI {
 		jf.add(BorderLayout.NORTH, top_panel);
 		jf.add(BorderLayout.CENTER, content_panel);
 
-		jf.setSize(500, 500);
+		jf.setSize(500, 800);
 		jf.setVisible(true);
 
 		jf.addWindowListener(new WindowAdapter() {
