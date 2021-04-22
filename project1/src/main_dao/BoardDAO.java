@@ -101,15 +101,18 @@ public class BoardDAO extends DBConn{
 	}
 	
 	/** ¼öÁ¤ **/
-	public void mycontent_update(String title, String content, int rownum) {
+	public void mycontent_update(String title, String category, String content, int rownum) {
+		
 		try {
 			String sql = " update content set title = ?, "
+					+ " category = ?, "
 					+ " content = ? "
 					+ " where contentnum = ? ";
 			getPreparedStatement(sql);
 			pstmt.setString(1, title);
-			pstmt.setString(2, content);
-			pstmt.setInt(3, rownum);
+			pstmt.setString(2, category);
+			pstmt.setString(3, content);
+			pstmt.setInt(4, rownum);
 			
 			rs = pstmt.executeQuery();
 			rs.next();

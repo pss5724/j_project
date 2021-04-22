@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +24,10 @@ public class MyContentSelectOne implements ActionListener{	//°Ô½Ã¹° ´­·¶À»¶§ Æ¯Á
 	JButton update_btn, delete_btn;
 	JTextArea content_ta;
 	JTextField title_tf;
+	JComboBox jcb;
+	String[] categorylist = {"Áß½Ä","¾ç½Ä","ÀÏ½Ä","ºÐ½Ä","ÇÑ½Ä"};
+	int food_num;
+	String category;
 	
 	public MyContentSelectOne(MainUI main, int rownum) {
 		this.main = main;	
@@ -37,13 +42,20 @@ public class MyContentSelectOne implements ActionListener{	//°Ô½Ã¹° ´­·¶À»¶§ Æ¯Á
 		
 		BoardVO board = main.system.select_one(rownum);
 		writer_l = new JLabel(board.getId());
-		category_l = new JLabel(board.getCategory());
+		//
+//		category_l = new JLabel(board.getCategory());
 		date_l = new JLabel(board.getDate());
 		content_ta = new JTextArea(4,30);
 		content_ta.setText(board.getContent());
 		update_btn = new JButton("¼öÁ¤");
 		delete_btn = new JButton("»èÁ¦");
 		
+		jcb = new JComboBox(categorylist);
+		category = board.getCategory();
+		System.out.println(category);
+		food_num = main.system.category_re(category);
+		System.out.println("foodnum: "+food_num);
+		jcb.setSelectedIndex(food_num);
 		title_tf = new JTextField(board.getTitle(),20);
 		
 		mycontentselect_panel = new JPanel();
@@ -55,7 +67,7 @@ public class MyContentSelectOne implements ActionListener{	//°Ô½Ã¹° ´­·¶À»¶§ Æ¯Á
 		
 		title_panel.add(title_tf);
 		center_panel.add(writer_l);
-		center_panel.add(category_l);
+		center_panel.add(jcb);
 		center_panel.add(date_l);
 		content_panel.add(content_ta);
 		button_panel.add(update_btn);
@@ -97,9 +109,10 @@ public class MyContentSelectOne implements ActionListener{	//°Ô½Ã¹° ´­·¶À»¶§ Æ¯Á
 					Commons.getMsg("¼öÁ¤ÇÒ ³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"));
 			content_ta.requestFocus();
 		}else {
+			String update_ctg = (String)jcb.getSelectedItem();
 			String update_title = title_tf.getText();
 			String update_content = content_ta.getText();
-			main.system.mycontent_update(update_title, update_content, rownum);
+			main.system.mycontent_update(update_title, update_ctg, update_content, rownum);
 			new MyContentUI(main);
 
 		}

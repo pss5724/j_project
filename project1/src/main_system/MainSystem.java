@@ -86,12 +86,30 @@ public class MainSystem {
 		}
 		
 		/** 내글 수정 **/
-		public void mycontent_update(String title, String content, int rownum) {
-			dao.mycontent_update(title, content, rownum);
+		public void mycontent_update(String title, String ctg, String content, int rownum) {
+			dao.mycontent_update(title, ctg, content, rownum);
 		}
 		
 		/** 내글 삭제 **/
 		public void mycontent_delete(int rownum) {
 			dao.mycontent_delete(rownum);
+		}
+		
+		/** 카테고리리턴 **/
+		public int category_re(String category) {
+			int foodnum=0;
+			
+			if(category.equals("중식")) {
+				foodnum = 0;
+			}else if(category.equals("양식")) {
+				foodnum = 1;
+			}else if(category.equals("일식")) {
+				foodnum = 2;
+			}else if(category.equals("분식")) {
+				foodnum = 3;
+			}else if(category.equals("한식"))
+				foodnum = 4;
+			
+			return foodnum;
 		}
 }
