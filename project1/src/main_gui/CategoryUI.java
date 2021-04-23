@@ -51,7 +51,6 @@ public class CategoryUI {
 		btnlist.add(korea_food);
 		
 		for(JButton btn: btnlist) {
-			btn.setSize(300, 300);
 			main.board_panel.add(btn);
 			btn.addActionListener(new ctgAction());
 		}

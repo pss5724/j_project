@@ -17,7 +17,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import main_ui.MyContentUI.Articles_clickon;
 import main_vo.BoardVO;
 
 public class SearchUI implements ActionListener{
@@ -34,7 +33,7 @@ public class SearchUI implements ActionListener{
 	String title;
 	int foodnum=0, rownum=0;
 	
-	//Consturctor
+	//Constructor
 	public SearchUI(MainUI main) {
 		this.main = main;
 		init();
@@ -77,7 +76,7 @@ public class SearchUI implements ActionListener{
 	}
 	
 	//table의 데이터
-	public void createJtableData(ArrayList<BoardVO> content) {
+	public void createJtableData() {
 		model = new DefaultTableModel(colNames, 0);
 		table = new JTable(model);
 		
@@ -120,8 +119,8 @@ public class SearchUI implements ActionListener{
 		//Method
 		public void	valueChanged(ListSelectionEvent e) {
 			int i = table.getSelectedRow();
-			new ContentUI(main, foodnum, rownum);
-//			new MyContentSelectOne(main, content.get(i).getContentnum());
+			BoardVO s_vo = content.get(i);
+			new ContentUI(main, s_vo);
 			
 		}
 	}
@@ -136,7 +135,7 @@ public class SearchUI implements ActionListener{
 			//검색
 				
 //			if(content[0].getContentnum() != 0) {
-				createJtableData(content);
+				createJtableData();
 				model.setColumnIdentifiers(colNames);
 				table.setRowHeight(20);
 				table.setAutoCreateRowSorter(false);

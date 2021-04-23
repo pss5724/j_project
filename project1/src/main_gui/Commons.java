@@ -12,6 +12,11 @@ public class Commons {
 		return font;
 	}
 	
+	public static Font getSmallFont() {
+		Font font = new Font("¸¼Àº °íµñ", Font.BOLD, 10);
+		return font;
+	}
+	
 	public static Font getContentFont() {
 		Font font = new Font("¸¼Àº °íµñ", Font.PLAIN, 12);
 		return font;

@@ -18,22 +18,6 @@ public class MainUIEvent implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		String name = e.getActionCommand().trim();
-//		
-//		if(obj == main.btnlist.get(0)) {	//등록
-//			if(HororogMgmSystem.LOGIN_RESULT){
-//				new InsertUI(main);				
-//			}else {
-//				JOptionPane.showMessageDialog(null,
-//						Commons.getMsg("로그인이 필요한 기능입니다"));
-//			}
-//		}else if(obj == main.menulist.get(1)) {	//조회
-//			if(HororogMgmSystem.LOGIN_RESULT){
-//				new SelectUI(main);				
-//			}else {
-//				JOptionPane.showMessageDialog(null,
-//						Commons.getMsg("로그인이 필요한 기능입니다"));
-//			}
-//		}else 
 			
 		if(obj == main.btnlist.get(3)) {	//검색
 				new SearchUI(main);	
@@ -47,67 +31,28 @@ public class MainUIEvent implements ActionListener{
 				main.jf.dispose();
 				new LoginUI();
 			}
-		}	else if(obj == main.btnlist.get(5)) {	//종료
+		}else if(obj == main.btnlist.get(5)) {	//종료
 			int result = JOptionPane.showConfirmDialog(null,
 					Commons.getMsg("정말로 종료하시겠습니까?"));
 			if(result ==0) {
 				main.system.close();
 				System.exit(0);
 			}
-		}
-			else if(obj == main.btnlist.get(4)) {
-				if(main.btnlist.get(4).getText().equals("회원관리")) {
-					if(main.member.getId().equals("admin")){
-						new MemberManagementUI(main);				
-					}else {
-						JOptionPane.showMessageDialog(null,
-								Commons.getMsg("관리자만 접근 가능합니다"));
-					}
+		}else if(obj == main.btnlist.get(4)) {
+			if(main.btnlist.get(4).getText().equals("회원관리")) {
+				if(main.member.getId().equals("admin")){
+					new MemberManagementUI(main);				
 				}else {
-					new MyUI(main);
+					JOptionPane.showMessageDialog(null,
+							Commons.getMsg("관리자만 접근 가능합니다"));
 				}
-				
+			}else {
+				new MyUI(main);
 			}
-//			if(true){
-//			}else {
-//				JOptionPane.showMessageDialog(null,
-//						Commons.getMsg("로그인이 필요한 기능입니다"));
-//			}
-//		}else if(obj == main.menulist.get(3)) {  //수정
-//			if(HororogMgmSystem.LOGIN_RESULT){
-//				new UpdateUI(main);				
-//			}else {
-//				JOptionPane.showMessageDialog(null,
-//						Commons.getMsg("로그인이 필요한 기능입니다"));
-//			}
-//		}else if(obj == main.menulist.get(4)) {
-//			if(HororogMgmSystem.LOGIN_RESULT){
-//				new DeleteUI(main);				
-//			}else {
-//				JOptionPane.showMessageDialog(null,
-//						Commons.getMsg("로그인이 필요한 기능입니다"));
-//			}
-//		}else if(obj == main.menulist.get(5)) {	//종료
-//			int result = JOptionPane.showConfirmDialog(null,
-//					Commons.getMsg("정말로 종료하시겠습니까?"));
-//			if(result ==0) {
-//				main.system.close();
-//				System.exit(0);
-//			}
-//		}else if(name.equals("로그인")) {
-//			new LoginUI(main);
-//		}else if(name.equals("로그아웃")) {
-//			int result = JOptionPane.showConfirmDialog(null,
-//					Commons.getMsg("정말로 로그아웃 하시겠습니까?"));
-//			if(result==0) {
-//				new LoginUI(main);
-//				main.btn_login.setText("     로그인      ");
-//				HororogMgmSystem.LOGIN_RESULT = false;
-//			}
-//		}else if(obj == main.btn_join) {
-//			new JoinUI(main);
-//		}
-//		
+				
+		}else if(obj==main.btnlist.get(2)) {	//내글관리
+			new MyContentUI(main);
+		}
 	}
 	
 }

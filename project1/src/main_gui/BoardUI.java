@@ -42,7 +42,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		inside_panel = new JPanel(new BorderLayout());
 		
 		model.setNumRows(0);
-		boardlist = main.system.select(food_num);
+		boardlist = main.system.select_ctg(main.member, food_num);
 		for(int i=0;i<boardlist.size();i++) {
 			row = new Object[5];
 			row[0] = i+1;
@@ -90,11 +90,9 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		write_btn.addActionListener(new writeAction());
 		
 		
-		
 		//리스트셀렉션 리스너
 		
 		Articles_clickon ac = new Articles_clickon();
-		
 		
 		table.setCellSelectionEnabled(true);
 		ListSelectionModel select = table.getSelectionModel();
@@ -103,12 +101,11 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 	}
 	
 	class Articles_clickon implements ListSelectionListener{
-		
 		//Method
 		public void	valueChanged(ListSelectionEvent e) {
 			int rownum = table.getSelectedRow();
-			new ContentUI(main, food_num, rownum).init();
-			
+			BoardVO s_vo = boardlist.get(rownum);
+			new ContentUI(main, s_vo);
 		}
 	}
 	
