@@ -11,9 +11,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import main_ui.MyContentUI.Articles_clickon;
 import main_vo.BoardVO;
 
 public class SearchUI implements ActionListener{
@@ -28,7 +32,7 @@ public class SearchUI implements ActionListener{
 	Panel search_content_panel;
 	ArrayList<BoardVO> content;
 	String title;
-
+	int foodnum=0, rownum=0;
 	
 	//Consturctor
 	public SearchUI(MainUI main) {
@@ -94,6 +98,32 @@ public class SearchUI implements ActionListener{
 		model.fireTableDataChanged();
 		table.setModel(model);
 		
+		//리스트셀렉션 리스너
+		
+		Articles_clickon ac = new Articles_clickon(this);
+		
+		
+		table.setCellSelectionEnabled(true);
+		ListSelectionModel select = table.getSelectionModel();
+		select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		select.addListSelectionListener(ac);
+	}
+	
+	class Articles_clickon implements ListSelectionListener{
+		//Field
+		SearchUI search;
+		
+		//Constructor
+		public Articles_clickon(SearchUI search) {
+			this.search = search;
+		}
+		//Method
+		public void	valueChanged(ListSelectionEvent e) {
+			int i = table.getSelectedRow();
+			new ContentUI(main, foodnum, rownum);
+//			new MyContentSelectOne(main, content.get(i).getContentnum());
+			
+		}
 	}
 	
 	public void search_proc() {
