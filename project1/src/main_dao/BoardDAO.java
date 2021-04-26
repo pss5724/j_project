@@ -12,34 +12,122 @@ public class BoardDAO extends DBConn{
 	
 	//지원 작성 부분
 	/** 검색 **/
-	public ArrayList<BoardVO> getSelectResult(String title) {
+	public ArrayList<BoardVO> getSelectResult(String category, String title) {
 		ArrayList<BoardVO> content = new ArrayList<BoardVO>();
-		try {
-			String sql = " select * "
-					+ " from content "
-					+ " where title like ?"
-					+ " order by content_date ";
-			getPreparedStatement(sql);
-			pstmt.setString(1, '%'+title+'%');	//?에 title 집어넣기
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				BoardVO board = new BoardVO();
-				board.setContentnum(rs.getInt(1));
-				board.setCategory(rs.getString(2));
-				board.setId(rs.getString(3));
-				board.setTitle(rs.getString(4));
-				board.setContent(rs.getString(5));
-				board.setDate(rs.getString(6));
-				board.setLocation(rs.getString(7));
+		if(category.equals("제목")) {
+			try {
+				String sql = " select * "
+						+ " from content "
+						+ " where title like ?"
+						+ " order by content_date ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, '%'+title+'%');	//?에 title 집어넣기
+				rs = pstmt.executeQuery();
 				
-				content.add(board);
+				while(rs.next()) {
+					BoardVO board = new BoardVO();
+					board.setContentnum(rs.getInt(1));
+					board.setCategory(rs.getString(2));
+					board.setId(rs.getString(3));
+					board.setTitle(rs.getString(4));
+					board.setContent(rs.getString(5));
+					board.setDate(rs.getString(6));
+					board.setLocation(rs.getString(7));
+					
+					content.add(board);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+			return content;
+		}else if(category.equals("작성자")) {
+			try {
+				String sql = " select * "
+						+ " from content "
+						+ " where id like ?"
+						+ " order by content_date ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, '%'+title+'%');	//?에 title 집어넣기
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					BoardVO board = new BoardVO();
+					board.setContentnum(rs.getInt(1));
+					board.setCategory(rs.getString(2));
+					board.setId(rs.getString(3));
+					board.setTitle(rs.getString(4));
+					board.setContent(rs.getString(5));
+					board.setDate(rs.getString(6));
+					board.setLocation(rs.getString(7));
+					
+					content.add(board);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
 			
+			return content;
+		}else if(category.equals("내용")) {
+			try {
+				String sql = " select * "
+						+ " from content "
+						+ " where content like ?"
+						+ " order by content_date ";
+				getPreparedStatement(sql);
+				pstmt.setString(1, '%'+title+'%');	//?에 title 집어넣기
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					BoardVO board = new BoardVO();
+					board.setContentnum(rs.getInt(1));
+					board.setCategory(rs.getString(2));
+					board.setId(rs.getString(3));
+					board.setTitle(rs.getString(4));
+					board.setContent(rs.getString(5));
+					board.setDate(rs.getString(6));
+					board.setLocation(rs.getString(7));
+					
+					content.add(board);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}
+			
+			return content;
 		}
+//		try {
+//			String sql = " select * "
+//					+ " from content "
+//					+ " where title like ?"
+//					+ " order by content_date ";
+//			getPreparedStatement(sql);
+//			pstmt.setString(1, '%'+title+'%');	//?에 title 집어넣기
+//			rs = pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				BoardVO board = new BoardVO();
+//				board.setContentnum(rs.getInt(1));
+//				board.setCategory(rs.getString(2));
+//				board.setId(rs.getString(3));
+//				board.setTitle(rs.getString(4));
+//				board.setContent(rs.getString(5));
+//				board.setDate(rs.getString(6));
+//				board.setLocation(rs.getString(7));
+//				
+//				content.add(board);
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			
+//		}
 		
 		return content;
 	}

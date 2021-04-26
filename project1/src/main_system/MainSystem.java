@@ -112,9 +112,9 @@ public class MainSystem {
 		
 		//지원 작성 부분
 		/** 검색 **/
-		public ArrayList<BoardVO> search(String title) {
+		public ArrayList<BoardVO> search(String category, String title) {
 			ArrayList<BoardVO> boardlist = new ArrayList<BoardVO>();
-			boardlist = dao.getSelectResult(title);
+			boardlist = dao.getSelectResult(category, title);
 			return boardlist;
 		}
 		

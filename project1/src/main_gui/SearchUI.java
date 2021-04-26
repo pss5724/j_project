@@ -6,7 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,7 +34,9 @@ public class SearchUI implements ActionListener{
 	JTable table;
 	Panel search_content_panel;
 	ArrayList<BoardVO> content;
-	String title;
+	String title, category;
+	JLabel lb_search;
+	JComboBox comboBox;
 	int foodnum=0, rownum=0;
 	
 	//Constructor
@@ -42,16 +48,23 @@ public class SearchUI implements ActionListener{
 	//Method
 	public void init() {
 		main.switch_panel(MainUI.SEARCH);
-		
 		main.search_panel.setLayout(new BorderLayout());
 		
 		//검색창
 		search_content_panel = new Panel(new BorderLayout());
 		Panel search_top = new Panel();
+		lb_search = new JLabel("검색조건");
 		tf_search = new JTextField(10);
 		btn_search = new JButton("검색");
+		lb_search.setFont(Commons.getFont());
 		tf_search.setFont(Commons.getFont());
 		btn_search.setFont(Commons.getFont());
+		comboBox = new JComboBox();
+		comboBox.setFont(Commons.getFont());
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"제목","작성자","내용"}));
+		
+		search_top.add(lb_search);
+		search_top.add(comboBox);
 		search_top.add(tf_search);
 		search_top.add(btn_search);
 		
@@ -82,7 +95,8 @@ public class SearchUI implements ActionListener{
 		
 		model.setNumRows(0);
 		title = tf_search.getText();
-		content = main.system.search(title);
+		category = comboBox.getSelectedItem().toString();
+		content = main.system.search(category, title);
 		for(int i=0; i<content.size(); i++) {
 			row = new Object[5];
 			
