@@ -61,7 +61,7 @@ public class MyContentUI{
 		JScrollPane pane = new JScrollPane(table);
 		mycontent_content_panel.add(BorderLayout.CENTER, pane);
 		main.mycontent_panel.add(BorderLayout.CENTER, mycontent_content_panel);
-		main.content_panel.add(main.mycontent_panel);
+		main.content_panel.add(BorderLayout.CENTER, main.mycontent_panel);
 		main.jf.setVisible(true);
 	}
 	

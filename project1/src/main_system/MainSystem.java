@@ -83,13 +83,6 @@ public class MainSystem {
 			return boardlist;
 		}
 		
-//		/** 특정 게시물 클릭시 게시글 조회 **/
-//		public BoardVO select_one(int food_num, int rownum) {
-//			BoardVO vo = new BoardVO();
-//			vo = dao.SelectOneResult(food_num, rownum);
-//			return vo;
-//		}
-		
 		/** 특정 게시물 클릭시 댓글 조회 **/
 		public ArrayList<CommentVO> select_reply(BoardVO contents_vo){
 			ArrayList<CommentVO> commentlist = new ArrayList<CommentVO>();
@@ -107,6 +100,19 @@ public class MainSystem {
 		/** 댓글 작성 **/
 		public int insert_reply(BoardVO b_vo, MemberVO m_vo, String comment) {
 			int result = cdao.insertReply(b_vo, m_vo, comment);
+			return result;
+		}
+		
+		/** 댓글 수정 **/
+		public int update_reply(String value, CommentVO c_vo) {
+			int result = cdao.updateReply(value,c_vo);
+			return result;
+		}
+		
+		/** 댓글 삭제 **/
+		public int delete_reply(CommentVO c_vo) {
+			int result = 0;
+			result = cdao.deleteReply(c_vo);
 			return result;
 		}
 		

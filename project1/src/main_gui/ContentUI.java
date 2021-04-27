@@ -22,7 +22,6 @@ import main_vo.CommentVO;
 public class ContentUI {	//게시물 눌렀을때 특정게시물
 	MainUI main;
 	JLabel category_l, title_l, writer_l, date_l;
-	int food_num, rownum;
 	JPanel title_panel, writer_panel, gridbag_panel,
 	category_panel, date_panel, contents_panel, button_panel,
 	above_panel, comment_panel;
@@ -31,12 +30,6 @@ public class ContentUI {	//게시물 눌렀을때 특정게시물
 	BoardVO contents_vo;
 	CommentUI commentUI;
 	
-	public ContentUI(MainUI main, int food_num, int rownum) {
-		this.main = main;
-		this.rownum = rownum;
-		this.food_num = food_num;
-		init();
-	}
 	public ContentUI(MainUI main, BoardVO contents_vo) {
 		this.main = main;
 		this.contents_vo = contents_vo;

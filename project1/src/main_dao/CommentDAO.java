@@ -82,4 +82,42 @@ public class  CommentDAO extends DBConn {
 		
 		return result;
 	}
+	
+	/** ´ñ±Û ¼öÁ¤ **/
+	public int updateReply(String value, CommentVO c_vo) {
+		int result=0;
+		int commentnum = c_vo.getCommentnum();
+		String sql = " update reply set "
+				+ " content = ? "
+				+ " where commentnum = ? ";
+		getPreparedStatement(sql);
+		try {
+			pstmt.setString(1, value);
+			pstmt.setInt(2, commentnum);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	/** ´ñ±Û »èÁ¦ **/
+	public int deleteReply(CommentVO c_vo) {
+		int result=0;
+		int commentnum = c_vo.getCommentnum();
+		String sql = " delete from reply where commentnum = ? ";
+		getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, commentnum);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
