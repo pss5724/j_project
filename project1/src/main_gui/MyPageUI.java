@@ -28,7 +28,7 @@ public void init() {
 	mycontent = new JButton("³»±Û");
 	mycomment = new JButton("³»´ñ±Û");
 	
-	
+	 
 	btn_panel.add(mycontent);
 	btn_panel.add(mycomment);
 	

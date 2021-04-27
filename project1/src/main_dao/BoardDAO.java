@@ -323,7 +323,7 @@ public class BoardDAO extends DBConn{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		
 		return result;
 	}

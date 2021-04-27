@@ -68,7 +68,7 @@ public class MyUI implements ActionListener{
 				Label label = new Label(name);
 				l_panel.add(label);
 				label_panel.add(l_panel);
-				
+				 
 				Panel t_panel = new Panel(new FlowLayout(FlowLayout.LEFT));
 				
 				if(name.equals("Áö¿ª")) {

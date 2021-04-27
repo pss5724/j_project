@@ -43,7 +43,7 @@ public class  CommentDAO extends DBConn {
 		
 		try {
 			pstmt.setString(1, member.getId());
-			
+			 
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				CommentVO vo = new CommentVO();

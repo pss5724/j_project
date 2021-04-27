@@ -62,7 +62,7 @@ public class MyCommentUI {
 				row[2] = commentlist.get(i).getDate();
 				row[3] = " ";
 				row[4] = " ";
-						
+						 
 				model.addRow(row);
 			}
 			
