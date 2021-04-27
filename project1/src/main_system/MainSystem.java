@@ -3,7 +3,8 @@ package main_system;
 import java.util.ArrayList;
 
 import main_dao.BoardDAO;
-import main_dao.MemberDAO; 
+import main_dao.CommentDAO;
+import main_dao.MemberDAO;
 import main_vo.BoardVO;
 import main_vo.CommentVO;
 import main_vo.MemberVO;
@@ -11,6 +12,7 @@ import main_vo.MemberVO;
 public class MainSystem {
 	MemberDAO mdao = new MemberDAO();	
 	BoardDAO dao = new BoardDAO();
+	CommentDAO cdao = new CommentDAO();
 	
 	//login 결과
 		public static boolean LOGIN_RESULT = false;
@@ -91,20 +93,20 @@ public class MainSystem {
 		/** 특정 게시물 클릭시 댓글 조회 **/
 		public ArrayList<CommentVO> select_reply(BoardVO contents_vo){
 			ArrayList<CommentVO> commentlist = new ArrayList<CommentVO>();
-			commentlist = dao.selectReply(contents_vo);
+			commentlist = cdao.selectReply(contents_vo);
 			return commentlist;
 		}
 		
 		/** 특정 게시물 클릭시 댓글 조회 **/
 		public ArrayList<CommentVO> select_reply(MemberVO member){
 			ArrayList<CommentVO> commentlist = new ArrayList<CommentVO>();
-			commentlist = dao.selectReply(member);
+			commentlist = cdao.selectReply(member);
 			return commentlist;
 		}
 		
 		/** 댓글 작성 **/
 		public int insert_reply(BoardVO b_vo, MemberVO m_vo, String comment) {
-			int result = dao.insertReply(b_vo, m_vo, comment);
+			int result = cdao.insertReply(b_vo, m_vo, comment);
 			return result;
 		}
 		
