@@ -120,7 +120,7 @@ public class MyCommentUI {
 		
 	}
 }
-
+ 
 class TableUpdateCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
 	
 	JButton jb; //수정, 삭제 버튼
