@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class MyPageUI 	implements ActionListener{
 MainUI main;
 JButton mycomment, mycontent;
-JPanel btn_panel;
+JPanel btn_panel, mypage_panel;
 
 
 
@@ -21,9 +21,10 @@ public MyPageUI(MainUI main) {
 
 public void init() {
 	main.switch_panel(MainUI.MYCONTENT);
-	main.content_panel.removeAll();
-	main.content_panel.setLayout(new GridLayout(2,1,3,3));
+	main.mycontent_panel.setLayout(new GridLayout(2,1,3,3));
+	
 	btn_panel = new JPanel();
+	mypage_panel = new JPanel(new GridLayout(2,1,3,3));
 	
 	mycontent = new JButton("³»±Û");
 	mycomment = new JButton("³»´ñ±Û");
@@ -31,8 +32,6 @@ public void init() {
 	 
 	btn_panel.add(mycontent);
 	btn_panel.add(mycomment);
-	
-	
 	main.mycontent_panel.add(btn_panel);
 	
 	main.content_panel.add(main.mycontent_panel);

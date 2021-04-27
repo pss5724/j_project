@@ -105,7 +105,6 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		//Method
 		public void	valueChanged(ListSelectionEvent e) {
 			int rownum = table.getSelectedRow();
-//			new ContentUI(main, food_num, rownum).init();
 			BoardVO s_vo = boardlist.get(rownum);
 			new ContentUI(main, s_vo);
 		}

@@ -28,7 +28,7 @@ public class MyContentUI{
 	String id;
 
 	
-	//Consturctor
+	//Constructor
 	public MyContentUI(MainUI main) {
 		this.main = main;
 		this.id = main.member.getId();

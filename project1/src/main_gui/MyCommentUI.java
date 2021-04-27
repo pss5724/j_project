@@ -33,7 +33,6 @@ public class MyCommentUI {
    JTextField comment_jtf;
    JButton comment_insert_btn;
    BoardVO s_vo;
-   JLabel comment_status_l, comment_write_l;
    JPanel mycomment_panel, comment_jtf_panel;
    MainUI main;
    
@@ -43,12 +42,10 @@ public class MyCommentUI {
    }
    
    public void init() {
-      //댓글 추가
+	  main.switch_panel(MainUI.MYCONTENT);
       mycomment_panel = new JPanel(new BorderLayout());   
-      comment_status_l = new JLabel("댓글");
  
       //댓글 패널
-      
       commentlist = main.system.select_reply(main.member); //시스템 가서 댓글 불러오기.
       if(commentlist.size() ==0) {   //댓글 없을 때
          JLabel nocomment = new JLabel("작성한 댓글이 없습니다");
@@ -61,7 +58,7 @@ public class MyCommentUI {
             row[1] = commentlist.get(i).getComment();
             row[2] = commentlist.get(i).getDate();
             row[3] = " ";
-                   
+
             model.addRow(row);
          }
          
@@ -74,36 +71,31 @@ public class MyCommentUI {
          
          
          table.getColumnModel().getColumn(3).setCellRenderer(new TableUpdateCell2("본문 조회", this));
-           table.getColumnModel().getColumn(3).setCellEditor(new TableUpdateCell2("본문 조회", this));
+         table.getColumnModel().getColumn(3).setCellEditor(new TableUpdateCell2("본문 조회", this));
          
-           table.getColumnModel().getColumn(0).setResizable(false);
-         table.getColumnModel().getColumn(0).setPreferredWidth(10);
+         table.getColumnModel().getColumn(0).setResizable(false);
+         table.getColumnModel().getColumn(0).setPreferredWidth(30);
          table.getColumnModel().getColumn(1).setResizable(false);
          table.getColumnModel().getColumn(1).setPreferredWidth(100);
          table.getColumnModel().getColumn(2).setResizable(false);
-         table.getColumnModel().getColumn(2).setPreferredWidth(10);
+         table.getColumnModel().getColumn(2).setPreferredWidth(30);
          table.getColumnModel().getColumn(3).setResizable(false);
-         table.getColumnModel().getColumn(3).setPreferredWidth(10);
+         table.getColumnModel().getColumn(3).setPreferredWidth(30);
          
          JScrollPane pane = new JScrollPane(table);
          
          //테이블 사이즈 지정
-         Dimension table_size = new Dimension(140,25+25*commentlist.size());
-         pane.setPreferredSize(table_size);
+         Dimension table_size = new Dimension(140,150);
+         pane.setSize(table_size);
          
-         
-         mycomment_panel.add(pane);
-         main.content_panel.removeAll();
-         main.content_panel.add(mycomment_panel);
+         mycomment_panel.add(BorderLayout.CENTER, pane);
+         main.mycontent_panel.add(BorderLayout.CENTER, mycomment_panel);
+         main.content_panel.add(main.mycontent_panel);
          main.jf.setVisible(true);
          
 
       }
          
-      
-      
-      
-      
    }
 }
  
