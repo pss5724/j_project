@@ -29,10 +29,19 @@ public class ContentUI {	//게시물 눌렀을때 특정게시물
 	JTextArea contents_ta;
 	BoardVO contents_vo;
 	CommentUI commentUI;
+	int contentnum;
 	
 	public ContentUI(MainUI main, BoardVO contents_vo) {
 		this.main = main;
 		this.contents_vo = contents_vo;
+		commentUI = new CommentUI(this);
+		init();
+	}
+	
+	public ContentUI(MainUI main, int contentnum) {
+		this.main = main;
+		this.contentnum = contentnum;
+		this.contents_vo = main.system.selectBoard(contentnum);
 		commentUI = new CommentUI(this);
 		init();
 	}

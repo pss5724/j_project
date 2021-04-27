@@ -25,7 +25,7 @@ import main_vo.BoardVO;
 import main_vo.CommentVO;
 
 public class MyCommentUI {
-   String[] colnames = {"ID","댓글","등록일","수정","삭제"};
+   String[] colnames = {"ID","댓글","등록일","본문 조회"};
    DefaultTableModel model= new DefaultTableModel(colnames,0);
    Object[] row;
    JTable table = new JTable(model);
@@ -56,12 +56,11 @@ public class MyCommentUI {
       }else {   //댓글 있을 때
          model.setNumRows(0);
          for(int i=0;i<commentlist.size();i++) {
-            row = new Object[5];
+            row = new Object[4];
             row[0] = commentlist.get(i).getId();
             row[1] = commentlist.get(i).getComment();
             row[2] = commentlist.get(i).getDate();
             row[3] = " ";
-            row[4] = " ";
                    
             model.addRow(row);
          }
@@ -73,20 +72,9 @@ public class MyCommentUI {
          table.setRowHeight(25);
          table.setAutoCreateRowSorter(false);
          
-         ImageIcon delete_icon = new ImageIcon("images/delete.png");
-         Image delete_image = delete_icon.getImage();
-         Image changeDelete = delete_image.getScaledInstance(20, 15, Image.SCALE_DEFAULT);
-         ImageIcon DeleteIcon = new ImageIcon(changeDelete);
-   
-         ImageIcon edit_icon = new ImageIcon("images/edit-button.png");
-         Image edit_image = edit_icon.getImage();
-         Image changeEdit = edit_image.getScaledInstance(20, 15, Image.SCALE_DEFAULT);
-         ImageIcon EditIcon = new ImageIcon(changeEdit);
          
-         table.getColumnModel().getColumn(3).setCellRenderer(new TableUpdateCell2("수정",EditIcon));
-           table.getColumnModel().getColumn(3).setCellEditor(new TableUpdateCell2("수정",EditIcon));
-           table.getColumnModel().getColumn(4).setCellRenderer(new TableUpdateCell2("삭제",DeleteIcon));
-           table.getColumnModel().getColumn(4).setCellEditor(new TableUpdateCell2("삭제",DeleteIcon));
+         table.getColumnModel().getColumn(3).setCellRenderer(new TableUpdateCell2("본문 조회", this));
+           table.getColumnModel().getColumn(3).setCellEditor(new TableUpdateCell2("본문 조회", this));
          
            table.getColumnModel().getColumn(0).setResizable(false);
          table.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -96,8 +84,6 @@ public class MyCommentUI {
          table.getColumnModel().getColumn(2).setPreferredWidth(10);
          table.getColumnModel().getColumn(3).setResizable(false);
          table.getColumnModel().getColumn(3).setPreferredWidth(10);
-         table.getColumnModel().getColumn(4).setResizable(false);
-         table.getColumnModel().getColumn(4).setPreferredWidth(10);
          
          JScrollPane pane = new JScrollPane(table);
          
@@ -124,29 +110,17 @@ public class MyCommentUI {
 class TableUpdateCell2 extends AbstractCellEditor implements TableCellEditor, TableCellRenderer{
    
    JButton jb; //수정, 삭제 버튼
-   
-   public TableUpdateCell2(String name, ImageIcon icon) {
-   
-      jb = new JButton(icon);
-      
-      
+   MyCommentUI mcu;
+   public TableUpdateCell2(String name, MyCommentUI mcu) {
+      jb = new JButton(name);
+      this.mcu = mcu;
       
       jb.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             String name = e.getActionCommand();
-            int result = 0;
             
-            if(name.equals("수정")) {
-//               new BoardUpdate(commentui,option);
-            }else if(name.equals("삭제")) {
-               int confirm = JOptionPane.showConfirmDialog(null, Commons.getMsg("정말로 삭제하시겠습니까?"));
-               if(confirm==JOptionPane.OK_OPTION) {
-                  //result = 뭔가 삭제를 한다..
-               }else {
-                  
-               }
-      
-//               if(result!=0) mycommentui.init(); 
+            if(name.equals("본문 조회")) {
+            	new ContentUI(mcu.main, mcu.commentlist.get(mcu.table.getSelectedRow()).getContentnum());
             }
          }
       });

@@ -162,7 +162,6 @@ public class CommentUI {
 		});
 			
 		
-		
 		return comment_panel;
 		
 	}

@@ -301,7 +301,30 @@ public class BoardDAO extends DBConn{
 		return list;
 	}
 	
-	
+	/** 게시물 하나 조회 **/
+	public BoardVO selectBoard(int contentnum) {
+		BoardVO vo = new BoardVO();
+		String sql = " select * from content where contentnum = ? ";
+
+		getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, contentnum);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			vo.setContentnum(rs.getInt(1));
+			vo.setCategory(rs.getString(2));
+			vo.setId(rs.getString(3));
+			vo.setTitle(rs.getString(4));
+			vo.setContent(rs.getString(5));
+			vo.setDate(rs.getString(6));
+			vo.setLocation(rs.getString(7));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+	}
 	
 	/** 게시글 작성 **/
 	public int writeArticle(MemberVO member, String ctg, String title, String contents) {

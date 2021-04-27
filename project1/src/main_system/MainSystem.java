@@ -143,6 +143,13 @@ public class MainSystem {
 			return check;
 		}
 		
+		/** contentnum으로 게시물 조회 **/
+		public BoardVO selectBoard(int contentnum) {
+			BoardVO vo = new BoardVO();
+			vo = dao.selectBoard(contentnum);
+			return vo;
+		}
+		
 		//지원 작성 부분
 		/** 검색 **/
 		public ArrayList<BoardVO> search(String category, String title) {
