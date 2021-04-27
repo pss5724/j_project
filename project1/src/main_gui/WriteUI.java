@@ -23,9 +23,9 @@ public class WriteUI {
 	//Field
 		MainUI main;
 		JLabel category_l, title_l, content_l;
-		JPanel label_panel, tf_panel_1, tf_panel_2, ta_panel, btn_panel, contents_panel;
+		JPanel label_panel_1, label_panel_2, tf_panel_1, tf_panel_2, ta_panel, btn_panel, contents_panel;
 		JButton write_btn,cancel_btn;
-		JTextField title_tf; //, select_tf;
+		JTextField title_tf;
 		JTextArea contents_ta;
 		JComboBox jcb;
 		String[] category_list = {"중식","양식","일식","분식","한식"};
@@ -59,27 +59,29 @@ public class WriteUI {
 			main.board_panel.setLayout(new BorderLayout());
 			
 			
-			label_panel = new JPanel(new GridLayout(4,1,0,50));
-			contents_panel = new JPanel(new GridLayout(3,1));
+			label_panel_1 = new JPanel(new GridLayout(4,1));
+			contents_panel = new JPanel(new GridLayout(2,1));
+			label_panel_2 = new JPanel(new GridLayout(2,1));
 			
-			ta_panel = new JPanel();
+			ta_panel = new JPanel(new BorderLayout());
 			tf_panel_1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			tf_panel_2 = new JPanel();
+			tf_panel_2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			btn_panel = new JPanel();
 			
 			category_l= new JLabel("카테고리");
 			title_l = new JLabel("제목");
 			content_l = new JLabel("내용");
 			
-			label_panel.add(category_l);
-			label_panel.add(title_l);
-			label_panel.add(content_l);
+			label_panel_2.add(category_l);
+			label_panel_2.add(title_l);
+			label_panel_1.add(label_panel_2);
+			label_panel_1.add(content_l);
 			
 //			select_tf = new JTextField(20);
 			jcb = new JComboBox(category_list);
 			jcb.setSelectedIndex(food_num-1);
-			title_tf = new JTextField(20);
-			contents_ta = new JTextArea(3,30);
+			title_tf = new JTextField(25);
+			contents_ta = new JTextArea(9,25);
 			contents_ta.setLineWrap(true);
 			
 			if(status==WriteUI.WRITE_UPDATE) {
@@ -97,17 +99,18 @@ public class WriteUI {
 			
 			tf_panel_1.add(jcb);
 			tf_panel_2.add(title_tf);
-			ta_panel.add(contents_ta);
 			
 			
 			contents_panel.add(tf_panel_1);
 			contents_panel.add(tf_panel_2);
-			contents_panel.add(ta_panel);
+			
+			ta_panel.add(BorderLayout.CENTER, contents_ta);
+			ta_panel.add(BorderLayout.NORTH, contents_panel);
 			
 
 			
-			main.board_panel.add(BorderLayout.WEST,label_panel);
-			main.board_panel.add(BorderLayout.CENTER,contents_panel);
+			main.board_panel.add(BorderLayout.WEST,label_panel_1);
+			main.board_panel.add(BorderLayout.CENTER,ta_panel);
 			main.board_panel.add(BorderLayout.SOUTH,btn_panel);
 			main.content_panel.add(main.board_panel);
 			

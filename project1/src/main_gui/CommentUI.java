@@ -73,14 +73,14 @@ public class CommentUI {
 			}
 			model.fireTableDataChanged();
 			
-//			for(String comment:comments) {
-//				tableSize=0;
-//				int comm = (comment.length()/5)*15;
-//				if(comm==0) comm=15;
-//				tableSize += comm+1;
-//			}
-			
-			tableSize = 150;
+			tableSize=0;
+			for(String comment:comments) {
+				int comm = (comment.length()/5)*10;
+				if(comm==0) comm=20;
+				tableSize += comm;
+			}
+			tableSize += 25;
+//			tableSize = 150;
 			
 			model.setColumnIdentifiers(colnames);
 			table.setModel(model);
