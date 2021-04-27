@@ -95,6 +95,13 @@ public class MainSystem {
 			return commentlist;
 		}
 		
+		/** 특정 게시물 클릭시 댓글 조회 **/
+		public ArrayList<CommentVO> select_reply(MemberVO member){
+			ArrayList<CommentVO> commentlist = new ArrayList<CommentVO>();
+			commentlist = dao.selectReply(member);
+			return commentlist;
+		}
+		
 		/** 댓글 작성 **/
 		public int insert_reply(BoardVO b_vo, MemberVO m_vo, String comment) {
 			int result = dao.insertReply(b_vo, m_vo, comment);

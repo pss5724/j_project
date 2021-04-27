@@ -51,7 +51,7 @@ public class MainUIEvent implements ActionListener{
 			}
 				
 		}else if(obj==main.btnlist.get(2)) {	//내글관리
-			new MyContentUI(main);
+			new MyPageUI(main);
 		}
 	}
 	
