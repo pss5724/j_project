@@ -46,7 +46,7 @@ public class MyCommentUI {
       //´ñ±Û Ãß°¡
       mycomment_panel = new JPanel(new BorderLayout());   
       comment_status_l = new JLabel("´ñ±Û");
-
+ 
       //´ñ±Û ÆÐ³Î
       
       commentlist = main.system.select_reply(main.member); //½Ã½ºÅÛ °¡¼­ ´ñ±Û ºÒ·¯¿À±â.
