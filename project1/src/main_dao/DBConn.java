@@ -18,10 +18,8 @@ public class DBConn {
 		public DBConn() {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
-				System.out.println("11---------------->>");
 				
 				conn = DriverManager.getConnection(url, user, pass);
-				System.out.println("22---------------->>");
 				
 			} catch (Exception e) {
 				e.printStackTrace();

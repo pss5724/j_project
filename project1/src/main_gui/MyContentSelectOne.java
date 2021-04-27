@@ -52,9 +52,7 @@ public class MyContentSelectOne implements ActionListener{	//°Ô½Ã¹° ´­·¶À»¶§ Æ¯Á
 		
 		jcb = new JComboBox(categorylist);
 		category = board.getCategory();
-		System.out.println(category);
 		food_num = main.system.category_re(category);
-		System.out.println("foodnum: "+food_num);
 		jcb.setSelectedIndex(food_num);
 		title_tf = new JTextField(board.getTitle(),20);
 		
