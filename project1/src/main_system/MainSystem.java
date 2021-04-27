@@ -119,6 +119,24 @@ public class MainSystem {
 			return check;
 		}
 		
+		/** 게시물 수정 **/
+		public boolean updateArticle(String ctg, String title, String contents, BoardVO update_vo) {
+			boolean check = false;
+			if(dao.updateArticle(ctg, title, contents, update_vo)!=0) {
+				check = true;
+			}
+			return check;
+		}
+		
+		/** 게시물 삭제 **/
+		public boolean deleteArticle(BoardVO contents_vo) {
+			boolean check = false;
+			if(dao.deleteArticle(contents_vo)!=0) {
+				check = true;
+			}
+			return check;
+		}
+		
 		//지원 작성 부분
 		/** 검색 **/
 		public ArrayList<BoardVO> search(String category, String title) {

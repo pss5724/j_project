@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -112,9 +113,14 @@ public class ContentUI {	//게시물 눌렀을때 특정게시물
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			if(obj==update_btn) {
-				//수정 버튼 눌렀을 때
+				new WriteUI(main, contents_vo, WriteUI.WRITE_UPDATE);
 			}else if(obj==delete_btn) {
-				//삭제 버튼 눌렀을 때
+				if(JOptionPane.showConfirmDialog(null, "정말로 삭제하시겠습니까?")==JOptionPane.OK_OPTION) {
+					if(main.system.deleteArticle(contents_vo)) {
+						JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+						new CategoryUI(main);
+					}
+				}
 			}
 		}
 		

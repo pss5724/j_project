@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import main_vo.BoardVO;
 import main_vo.MemberVO;
 
 public class WriteUI {
@@ -28,15 +29,26 @@ public class WriteUI {
 		JTextArea contents_ta;
 		JComboBox jcb;
 		String[] category_list = {"중식","양식","일식","분식","한식"};
-		int food_num;
+		int food_num, status;
 		MemberVO member = new MemberVO();
+		BoardVO update_vo = new BoardVO();
+		public static final int WRITE_INSERT = 1;
+		public static final int WRITE_UPDATE = 2;
 		
 		//Constructor
-		public WriteUI(MainUI main, int food_num) {
+		public WriteUI(MainUI main, int food_num, int status) {
 			this.main = main;
 			this.food_num = food_num;
 			this.member = main.member;
+			this.status = status;
 			
+			init();
+		}
+		public WriteUI(MainUI main, BoardVO vo, int status) {
+			this.main = main;
+			this.member = main.member;
+			this.update_vo = vo;
+			this.status = status;
 			init();
 		}
 		
@@ -69,7 +81,14 @@ public class WriteUI {
 			title_tf = new JTextField(20);
 			contents_ta = new JTextArea(3,30);
 			contents_ta.setLineWrap(true);
-
+			
+			if(status==WriteUI.WRITE_UPDATE) {
+				jcb.setSelectedItem(update_vo.getCategory());
+				title_tf.setText(update_vo.getTitle());
+				contents_ta.setText(update_vo.getContent());
+			}
+			
+			
 			write_btn = new JButton("글쓰기");
 			cancel_btn = new JButton("취소");
 			
@@ -118,9 +137,21 @@ public class WriteUI {
 				}else if(write_content.trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "내용을 입력해주세요.");
 				}else {
-					if(main.system.writeArticle(member,write_ctg,write_title,write_content)){
-						JOptionPane.showMessageDialog(null, "게시글이 등록되었습니다.");
-						new BoardUI(main,food_num);
+					if(status==WriteUI.WRITE_INSERT) {	//글 등록일 경우
+						if(main.system.writeArticle(member,write_ctg,write_title,write_content)){
+							JOptionPane.showMessageDialog(null, "게시글이 등록되었습니다.");
+							new BoardUI(main,food_num);
+						}
+					}else if(status==WriteUI.WRITE_UPDATE) {	//글 수정일 경우
+						if(main.system.updateArticle(write_ctg,write_title,write_content,update_vo)) {
+							JOptionPane.showMessageDialog(null, "수정이 완료되었습니다.");
+							update_vo.setCategory(write_ctg);
+							update_vo.setTitle(write_title);
+							update_vo.setContent(write_content);
+							new ContentUI(main, update_vo);
+						}else {
+							JOptionPane.showMessageDialog(null, "수정이 실패하였습니다.");
+						}
 					}
 				}
 			}else if(obj==cancel_btn) {		//취소 버튼 눌렀을때

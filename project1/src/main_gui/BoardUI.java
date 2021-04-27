@@ -90,6 +90,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		write_btn.addActionListener(new writeAction());
 		
 		
+		
 		//리스트셀렉션 리스너
 		
 		Articles_clickon ac = new Articles_clickon();
@@ -104,6 +105,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		//Method
 		public void	valueChanged(ListSelectionEvent e) {
 			int rownum = table.getSelectedRow();
+//			new ContentUI(main, food_num, rownum).init();
 			BoardVO s_vo = boardlist.get(rownum);
 			new ContentUI(main, s_vo);
 		}
@@ -115,7 +117,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			if(obj==write_btn) {
-				new WriteUI(main, food_num);
+				new WriteUI(main, food_num, WriteUI.WRITE_INSERT);
 			}
 		}
 		

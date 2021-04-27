@@ -328,6 +328,43 @@ public class BoardDAO extends DBConn{
 		return result;
 	}
 	
+	/** 게시물 수정 **/
+	public int updateArticle(String ctg, String title, String contents, BoardVO update_vo) {
+		int result = 0;
+		int contentnum = update_vo.getContentnum();
+		String sql = " UPDATE CONTENT SET CATEGORY = ?, TITLE = ?, CONTENT = ? WHERE CONTENTNUM = ? ";
+		getPreparedStatement(sql);
+		
+		try {
+			pstmt.setString(1, ctg);
+			pstmt.setString(2, title);
+			pstmt.setString(3, contents);
+			pstmt.setInt(4, contentnum);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/** 게시물 삭제 **/
+	public int deleteArticle(BoardVO vo) {
+		int result = 0;
+		int contentnum = vo.getContentnum();
+		String sql = " DELETE FROM CONTENT WHERE CONTENTNUM = ? ";
+		getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, contentnum);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	/**종료**/
 	public void close() {
