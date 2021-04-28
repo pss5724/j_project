@@ -47,7 +47,7 @@ public class MainUIEvent implements ActionListener{
 							Commons.getMsg("관리자만 접근 가능합니다"));
 				}
 			}else {
-				new MyUI(main);
+				new MyInfoUI(main);
 			}
 				
 		}else if(obj==main.btnlist.get(2)) {	//내글관리

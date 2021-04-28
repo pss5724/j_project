@@ -1,123 +1,128 @@
 package main_gui;
 
 import java.awt.BorderLayout;
-import java.awt.Panel;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import main_vo.BoardVO;
 
-public class MyContentUI{
-	//Field
+public class MyContentUI implements ActionListener{	//게시물 눌렀을때 특정게시물
 	MainUI main;
-	String[] colNames = {"no","카테고리","작성자","제목","등록일"};
-	Object[] row = new Object[5];	//table의 행을 구성하는 배열
-	DefaultTableModel model;	
-	JTable table;
-	Panel mycontent_content_panel;
-	ArrayList<BoardVO> content;
-	String id;
-
+	JLabel  writer_l, category_l, date_l;
+	int rownum;
+	JPanel mycontentselect_panel, title_panel, center_panel,
+		content_panel, button_panel, top_panel;
+	JButton update_btn, delete_btn;
+	JTextArea content_ta;
+	JTextField title_tf;
+	JComboBox jcb;
+	String[] categorylist = {"중식","양식","일식","분식","한식"};
+	int food_num;
+	String category;
 	
-	//Constructor
-	public MyContentUI(MainUI main) {
-		this.main = main;
-		this.id = main.member.getId();
+	public MyContentUI(MainUI main, int rownum) {
+		this.main = main;	
+		this.rownum = rownum;
 		init();
+	
 	}
 	
-	//Method
 	public void init() {
 		main.switch_panel(MainUI.MYCONTENT);
-		
 		main.mycontent_panel.setLayout(new BorderLayout());
 		
-		//검색창
-		mycontent_content_panel = new Panel(new BorderLayout());
+		BoardVO board = main.system.select_one(rownum);
+		writer_l = new JLabel(board.getId());
+		//
+//		category_l = new JLabel(board.getCategory());
+		date_l = new JLabel(board.getDate());
+		content_ta = new JTextArea(4,30);
+		content_ta.setText(board.getContent());
+		update_btn = new JButton("수정");
+		delete_btn = new JButton("삭제");
 		
-//		main.jf.setVisible(true);
+		jcb = new JComboBox(categorylist);
+		category = board.getCategory();
+		food_num = main.system.category_re(category);
+		jcb.setSelectedIndex(food_num);
+		title_tf = new JTextField(board.getTitle(),20);
 		
-		createJtableData(content);
-		model.setColumnIdentifiers(colNames);
-		table.setRowHeight(20);
-		table.setAutoCreateRowSorter(false);
+		mycontentselect_panel = new JPanel();
+		top_panel = new JPanel(new GridLayout(2,1));
+		title_panel = new JPanel();
+		center_panel = new JPanel(new GridLayout(1,3));
+		content_panel = new JPanel();
+		button_panel = new JPanel(new GridLayout(1,2));
 		
-		TableColumnModel tcm = table.getColumnModel();
-		table.getColumn("no").setPreferredWidth(20);
-		table.getColumn("카테고리").setPreferredWidth(60);
-		table.getColumn("작성자").setPreferredWidth(50);
-		table.getColumn("제목").setPreferredWidth(200);
-		table.getColumn("등록일").setPreferredWidth(100);
+		title_panel.add(title_tf);
+		center_panel.add(writer_l);
+		center_panel.add(jcb);
+		center_panel.add(date_l);
+		content_panel.add(content_ta);
+		button_panel.add(update_btn);
+		button_panel.add(delete_btn);
+		top_panel.add(title_panel);
+		top_panel.add(center_panel);
 		
-		JScrollPane pane = new JScrollPane(table);
-		mycontent_content_panel.add(BorderLayout.CENTER, pane);
-		main.mycontent_panel.add(BorderLayout.CENTER, mycontent_content_panel);
-		main.content_panel.add(BorderLayout.CENTER, main.mycontent_panel);
+		main.mycontent_panel.add(BorderLayout.NORTH, top_panel);
+		main.mycontent_panel.add(BorderLayout.CENTER, content_panel);
+		main.mycontent_panel.add(BorderLayout.SOUTH, button_panel);
+		main.content_panel.add(main.mycontent_panel);
+		
 		main.jf.setVisible(true);
+		update_btn.addActionListener(this);
+		delete_btn.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		
+		if(obj == update_btn) {
+			update_result_proc();
+			
+		}else if(obj == delete_btn) {
+			delete_proc();
+			
+			new MyContentListUI(main);
+		}
 	}
 	
-	//table의 데이터
-	public void createJtableData(ArrayList<BoardVO> content) {
-		model = new DefaultTableModel(colNames, 0);
-		table = new JTable(model);
-		
-		model.setNumRows(0);
-		content = main.system.mycontent_search(id);
-		this.content = content;
-		for(int i=0; i<content.size(); i++) {
-			row = new Object[5];
-			
-			row[0] = content.get(i).getContentnum();
-			row[1] = content.get(i).getCategory();
-			row[2] = content.get(i).getId();
-			row[3] = content.get(i).getTitle();
-			row[4] = content.get(i).getDate();
-			model.addRow(row);
+	public void update_result_proc() {
+		if(title_tf.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+					Commons.getMsg("수정할 제목을 입력해주세요"));
+			title_tf.requestFocus();
+		}else if(content_ta.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, 
+					Commons.getMsg("수정할 내용을 입력해주세요"));
+			content_ta.requestFocus();
+		}else {
+			String update_ctg = (String)jcb.getSelectedItem();
+			String update_title = title_tf.getText();
+			String update_content = content_ta.getText();
+			main.system.mycontent_update(update_title, update_ctg, update_content, rownum);
+			new MyContentListUI(main);
+
 		}
-		
-		model.fireTableDataChanged();
-		table.setModel(model);
-		
-		//리스트셀렉션 리스너
-		
-		Articles_clickon ac = new Articles_clickon(this);
-		
-		
-		table.setCellSelectionEnabled(true);
-		ListSelectionModel select = table.getSelectionModel();
-		select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		select.addListSelectionListener(ac);
 	}
 	
-		
-	class Articles_clickon implements ListSelectionListener{
-		//Field
-		MyContentUI mycontent;
-		
-		//Constructor
-		public Articles_clickon(MyContentUI mycontent) {
-			this.mycontent = mycontent;
-		}
-		//Method
-		public void	valueChanged(ListSelectionEvent e) {
-//			int rownum = table.getSelectedRow();
-//			new MyContentSelectOne(main, rownum);
-			int i = table.getSelectedRow();
-			new MyContentSelectOne(main, content.get(i).getContentnum());
-			
+	public void delete_proc() {
+		int result = JOptionPane.showConfirmDialog(null,
+				Commons.getMsg("정말로 삭제하시겠습니까?"));
+		if(result == 0) {
+			main.system.mycontent_delete(rownum);
+			JOptionPane.showMessageDialog(null, Commons.getMsg("삭제 완료"));
 		}
 	}
-		
+	
 }
-
-
-

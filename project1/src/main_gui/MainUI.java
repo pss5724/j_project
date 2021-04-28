@@ -73,7 +73,7 @@ public class MainUI {
 		my_panel = new JPanel();
 
 		String[] menulist = { "채팅", "게시판", "내글", "검색", "회원관리", "종료" };
-		String[] menulist2 = { "채팅", "게시판", "내글", "검색", "마이페이지", "종료" };
+		String[] menulist2 = { "채팅", "게시판", "내글", "검색", "내정보", "종료" };
 
 		if (member.getId().equals("admin")) {
 			for (String name : menulist) {

@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import main_vo.MemberVO;
 
-public class MyUI implements ActionListener{
+public class MyInfoUI implements ActionListener{
 	//Field
 		MainUI main;
 		JTextField tf_search;
@@ -39,7 +39,7 @@ public class MyUI implements ActionListener{
 		JRadioButton rb7 = new JRadioButton("제주");
 		
 		//Constructor
-		public MyUI(MainUI main) {
+		public MyInfoUI(MainUI main) {
 			this.main = main;
 			init();
 		}
@@ -143,7 +143,7 @@ public class MyUI implements ActionListener{
 			boolean result = main.system.memberUpdate(member,main.member.getId());
 			if(result != false) {
 				JOptionPane.showMessageDialog(null, Commons.getMsg("수정완료"));
-				new MyUI(main);
+				new MyInfoUI(main);
 			}else {
 				JOptionPane.showMessageDialog(null, Commons.getMsg("수정실패"));
 			}

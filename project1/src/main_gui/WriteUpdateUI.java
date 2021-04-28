@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import main_vo.BoardVO;
 import main_vo.MemberVO;
 
-public class WriteUI {
+public class WriteUpdateUI {
 
 	
 	//Field
@@ -36,7 +36,7 @@ public class WriteUI {
 		public static final int WRITE_UPDATE = 2;
 		
 		//Constructor
-		public WriteUI(MainUI main, int food_num, int status) {
+		public WriteUpdateUI(MainUI main, int food_num, int status) {
 			this.main = main;
 			this.food_num = food_num;
 			this.member = main.member;
@@ -44,7 +44,7 @@ public class WriteUI {
 			
 			init();
 		}
-		public WriteUI(MainUI main, BoardVO vo, int status) {
+		public WriteUpdateUI(MainUI main, BoardVO vo, int status) {
 			this.main = main;
 			this.member = main.member;
 			this.update_vo = vo;
@@ -84,7 +84,7 @@ public class WriteUI {
 			contents_ta = new JTextArea(9,25);
 			contents_ta.setLineWrap(true);
 			
-			if(status==WriteUI.WRITE_UPDATE) {
+			if(status==WriteUpdateUI.WRITE_UPDATE) {
 				jcb.setSelectedItem(update_vo.getCategory());
 				title_tf.setText(update_vo.getTitle());
 				contents_ta.setText(update_vo.getContent());
@@ -140,12 +140,12 @@ public class WriteUI {
 				}else if(write_content.trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "내용을 입력해주세요.");
 				}else {
-					if(status==WriteUI.WRITE_INSERT) {	//글 등록일 경우
+					if(status==WriteUpdateUI.WRITE_INSERT) {	//글 등록일 경우
 						if(main.system.writeArticle(member,write_ctg,write_title,write_content)){
 							JOptionPane.showMessageDialog(null, "게시글이 등록되었습니다.");
 							new BoardUI(main,food_num);
 						}
-					}else if(status==WriteUI.WRITE_UPDATE) {	//글 수정일 경우
+					}else if(status==WriteUpdateUI.WRITE_UPDATE) {	//글 수정일 경우
 						if(main.system.updateArticle(write_ctg,write_title,write_content,update_vo)) {
 							JOptionPane.showMessageDialog(null, "수정이 완료되었습니다.");
 							update_vo.setCategory(write_ctg);

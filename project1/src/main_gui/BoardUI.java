@@ -116,7 +116,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			if(obj==write_btn) {
-				new WriteUI(main, food_num, WriteUI.WRITE_INSERT);
+				new WriteUpdateUI(main, food_num, WriteUpdateUI.WRITE_INSERT);
 			}
 		}
 		

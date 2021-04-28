@@ -48,7 +48,7 @@ public void init() {
 public void actionPerformed(ActionEvent e) {
 	Object obj = e.getSource();
 	if(obj == mycontent) {
-		new MyContentUI(main);
+		new MyContentListUI(main);
 	}else if(obj == mycomment) {
 		new MyCommentUI(main);
 	}
