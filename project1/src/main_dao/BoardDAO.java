@@ -16,7 +16,7 @@ public class BoardDAO extends DBConn{
 		ArrayList<BoardVO> content = new ArrayList<BoardVO>();
 		if(category.equals("제목")) {
 			try {
-				String sql = " select * "
+				String sql = " select CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, TO_CHAR(CONTENT_DATE,'YYYY/MM/DD'), LOCATION "
 						+ " from content "
 						+ " where title like ?"
 						+ " order by content_date ";
@@ -45,7 +45,7 @@ public class BoardDAO extends DBConn{
 			return content;
 		}else if(category.equals("작성자")) {
 			try {
-				String sql = " select * "
+				String sql = " select CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, TO_CHAR(CONTENT_DATE,'YYYY/MM/DD'), LOCATION "
 						+ " from content "
 						+ " where id like ?"
 						+ " order by content_date ";
@@ -74,7 +74,7 @@ public class BoardDAO extends DBConn{
 			return content;
 		}else if(category.equals("내용")) {
 			try {
-				String sql = " select * "
+				String sql = " select CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, TO_CHAR(CONTENT_DATE,'YYYY/MM/DD'), LOCATION "
 						+ " from content "
 						+ " where content like ?"
 						+ " order by content_date ";
@@ -138,7 +138,7 @@ public class BoardDAO extends DBConn{
 		MemberVO memeber = new MemberVO();
 		
 		try {
-			String sql = " select contentNum, category, id, title, content_date "
+			String sql = " select contentNum, category, id, title, to_char(content_date, 'YYYY/MM/DD') "
 					+ " from content "
 					+ " where id = ? "
 					+ " order by content_date ";
@@ -169,7 +169,7 @@ public class BoardDAO extends DBConn{
 		BoardVO board = new BoardVO();
 		
 		try {
-			String sql = " select title, id, category, content_date, content "
+			String sql = " select title, id, category, to_char(content_date, 'YYYY/MM/DD'), content "
 					+ " from content "
 					+ " where contentnum = ? "
 					+ " order by content_date ";
@@ -236,19 +236,29 @@ public class BoardDAO extends DBConn{
 	
 	
 	// 세희 작성 부분 
-	/** 전체 조회 **/
+	/** 카테고리별 게시판 조회 **/
 	public ArrayList<BoardVO> SelectResult(MemberVO m_vo, int food_num) {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		String location = m_vo.getLocation();
 		if(food_num==CategoryUI.ALL_FOOD) {	//카테고리가 전체일 경우
-			String sql = " SELECT * FROM CONTENT " + 
+			String sql = " SELECT CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, TO_CHAR(CONTENT_DATE,'YYYY/MM/DD'), "
+					+ " LOCATION FROM CONTENT " + 
 					" WHERE CATEGORY IN ('중식','양식','일식','분식','한식') " + 
 					" AND LOCATION = ? ORDER BY CONTENT_DATE DESC ";
 			getPreparedStatement(sql);
-			
+			try {
+				pstmt.setString(1, location);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(food_num==CategoryUI.ADMIN) { //admin의 모든 글 보기일 경우
+			String sql = " SELECT CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, "
+					+ " TO_CHAR(CONTENT_DATE,'MM/DD'), LOCATION FROM CONTENT ORDER BY CONTENT_DATE DESC ";
+			getPreparedStatement(sql);
+
 		}else {	//카테고리가 전체가 아닐 경우
-		
-			String sql = " SELECT * FROM CONTENT " + 
+			String sql = " SELECT CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, TO_CHAR(CONTENT_DATE,'YYYY/MM/DD'), "
+					+ " LOCATION FROM CONTENT " + 
 					" WHERE LOCATION = ? AND CATEGORY = ? " + 
 					" ORDER BY CONTENT_DATE DESC ";
 			getPreparedStatement(sql);
@@ -272,14 +282,15 @@ public class BoardDAO extends DBConn{
 				pstmt.setString(2,"한식");
 				break;
 			}
+			
+			pstmt.setString(1, location);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		//location 맵핑, sql 적용, 데이터 가져오기
+		//sql 적용, 데이터 가져오기
 		try {
-			pstmt.setString(1, location);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				BoardVO vo = new BoardVO();
@@ -304,7 +315,8 @@ public class BoardDAO extends DBConn{
 	/** 게시물 하나 조회 **/
 	public BoardVO selectBoard(int contentnum) {
 		BoardVO vo = new BoardVO();
-		String sql = " select * from content where contentnum = ? ";
+		String sql = " select CONTENTNUM, CATEGORY, ID, TITLE, CONTENT, TO_CHAR(CONTENT_DATE,'YYYY/MM/DD'), "
+				+ " LOCATION from content where contentnum = ? ";
 
 		getPreparedStatement(sql);
 		try {

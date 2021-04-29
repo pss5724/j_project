@@ -1,6 +1,6 @@
 package main_gui;
 
-public class CharServerTest {
+public class ChatServerTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

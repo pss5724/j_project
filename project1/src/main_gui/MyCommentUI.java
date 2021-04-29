@@ -17,9 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import main_vo.BoardVO;
 import main_vo.CommentVO;
@@ -74,14 +77,20 @@ public class MyCommentUI {
          table.getColumnModel().getColumn(3).setCellEditor(new TableUpdateCell2("본문 조회", this));
          
          table.getColumnModel().getColumn(0).setResizable(false);
-         table.getColumnModel().getColumn(0).setPreferredWidth(30);
+         table.getColumnModel().getColumn(0).setPreferredWidth(15);
          table.getColumnModel().getColumn(1).setResizable(false);
-         table.getColumnModel().getColumn(1).setPreferredWidth(100);
+         table.getColumnModel().getColumn(1).setPreferredWidth(180);
          table.getColumnModel().getColumn(2).setResizable(false);
-         table.getColumnModel().getColumn(2).setPreferredWidth(30);
+         table.getColumnModel().getColumn(2).setPreferredWidth(40);
          table.getColumnModel().getColumn(3).setResizable(false);
-         table.getColumnModel().getColumn(3).setPreferredWidth(30);
+         table.getColumnModel().getColumn(3).setPreferredWidth(50);
          
+         DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();	//셀 가운데 정렬
+ 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);		
+ 		TableColumnModel tcm = table.getColumnModel();
+ 			tcm.getColumn(0).setCellRenderer(dtcr);
+ 			tcm.getColumn(2).setCellRenderer(dtcr);
+ 		
          JScrollPane pane = new JScrollPane(table);
          
          //테이블 사이즈 지정

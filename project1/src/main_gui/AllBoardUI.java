@@ -19,11 +19,11 @@ import javax.swing.table.TableColumnModel;
 
 import main_vo.BoardVO;
 
-public class BoardUI {	//카테고리 눌렀을때 게시물들
+public class AllBoardUI {	//카테고리 눌렀을때 게시물들
 	MainUI main;
 	JPanel inside_panel;
 	JPanel buttonpanel;
-	String[] colnames = {"NO","카테고리","작성자","제목","등록일"};
+	String[] colnames = {"NO","카테고리","작성자","제목","등록일","지역"};
 	DefaultTableModel model= new DefaultTableModel(colnames,0);
 	Object[] row;
 	JTable table = new JTable(model);
@@ -31,7 +31,7 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 	int food_num;
 	ArrayList<BoardVO> boardlist;
 	
-	public BoardUI(MainUI main, int num) {
+	public AllBoardUI(MainUI main, int num) {
 		this.main = main;
 		food_num=num;
 		init();
@@ -44,12 +44,13 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		model.setNumRows(0);
 		boardlist = main.system.select_ctg(main.member, food_num);
 		for(int i=0;i<boardlist.size();i++) {
-			row = new Object[5];
+			row = new Object[6];
 			row[0] = i+1;
 			row[1] = boardlist.get(i).getCategory();
 			row[2] = boardlist.get(i).getId();
 			row[3] = boardlist.get(i).getTitle();
 			row[4] = boardlist.get(i).getDate();
+			row[5] = boardlist.get(i).getLocation();
 			model.addRow(row);
 		}
 		model.fireTableDataChanged();
@@ -64,12 +65,13 @@ public class BoardUI {	//카테고리 눌렀을때 게시물들
 		table.getColumn("카테고리").setPreferredWidth(60);
 		table.getColumn("작성자").setPreferredWidth(70);
 		table.getColumn("제목").setPreferredWidth(200);
-		table.getColumn("등록일").setPreferredWidth(80);
+		table.getColumn("등록일").setPreferredWidth(50);
+		table.getColumn("지역").setPreferredWidth(50);
 		
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();	//셀 가운데 정렬
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);		
 		TableColumnModel tcm = table.getColumnModel();
-		for(int i=0;i<5;i++) {
+		for(int i=0;i<6;i++) {
 			tcm.getColumn(i).setCellRenderer(dtcr);
 		}
 

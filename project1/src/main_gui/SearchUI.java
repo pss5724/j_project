@@ -16,8 +16,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -154,12 +156,18 @@ public class SearchUI implements ActionListener{
 				table.setRowHeight(20);
 				table.setAutoCreateRowSorter(false);
 				
-				TableColumnModel tcm = table.getColumnModel();
 				table.getColumn("no").setPreferredWidth(20);
 				table.getColumn("카테고리").setPreferredWidth(60);
-				table.getColumn("작성자").setPreferredWidth(50);
+				table.getColumn("작성자").setPreferredWidth(70);
 				table.getColumn("제목").setPreferredWidth(200);
-				table.getColumn("등록일").setPreferredWidth(100);
+				table.getColumn("등록일").setPreferredWidth(80);
+				
+				DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();	//셀 가운데 정렬
+				dtcr.setHorizontalAlignment(SwingConstants.CENTER);		
+				TableColumnModel tcm = table.getColumnModel();
+				for(int i=0;i<5;i++) {
+					tcm.getColumn(i).setCellRenderer(dtcr);
+				}
 				
 				JScrollPane pane = new JScrollPane(table);
 				search_content_panel.add(BorderLayout.CENTER, pane);

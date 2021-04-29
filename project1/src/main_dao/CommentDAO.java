@@ -38,7 +38,7 @@ public class  CommentDAO extends DBConn {
 	
 	public ArrayList<CommentVO> selectReply(MemberVO member){
 		ArrayList<CommentVO> commentlist = new ArrayList<CommentVO>();
-		String sql = " SELECT * FROM REPLY WHERE id = ? ORDER BY COMMENTDATE ASC ";
+		String sql = " SELECT COMMENTNUM, CONTENTNUM, ID, CONTENT, TO_CHAR(COMMENTDATE,'YYYY/MM/DD') FROM REPLY WHERE id = ? ORDER BY COMMENTDATE ASC ";
 		getPreparedStatement(sql);
 		
 		try {

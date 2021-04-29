@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 public class CategoryUI {
 	MainUI main;
 	JButton all_food,china_food,west_food,japan_food,
-	korea_food,boonsik;
-	JPanel button_panel;
+	korea_food,boonsik, admin_btn;
+	JPanel button_panel, grid_panel;
 	ArrayList<JButton> btnlist;
 	public static final int ALL_FOOD = 0;
 	public static final int CHINA_FOOD=1;
@@ -24,6 +24,7 @@ public class CategoryUI {
 	public static final int JAPAN_FOOD=3;
 	public static final int BOONSIK=4;
 	public static final int KOREA_FOOD=5;
+	public static final int ADMIN=6;
 	
 	
 	public CategoryUI(MainUI main) {
@@ -33,7 +34,9 @@ public class CategoryUI {
 	
 	public void init() {
 		main.switch_panel(MainUI.BOARD);
-		main.board_panel.setLayout(new GridLayout(3,2,20,20));
+		main.board_panel.setLayout(new BorderLayout(20, 300));
+		grid_panel = new JPanel(new GridLayout(3,2,20,20));
+//		main.board_panel.setLayout(new GridLayout(3,2,20,20));
 		btnlist = new ArrayList<JButton>();
 		
 		all_food = new JButton("전체");
@@ -42,6 +45,7 @@ public class CategoryUI {
 		japan_food = new JButton("일식");
 		boonsik = new JButton("분식");
 		korea_food = new JButton("한식");
+		admin_btn = new JButton("모든 글 보기");
 		
 		btnlist.add(all_food);
 		btnlist.add(china_food);
@@ -50,11 +54,20 @@ public class CategoryUI {
 		btnlist.add(boonsik);
 		btnlist.add(korea_food);
 		
+		if(!main.member.getId().equals("admin")) {
+			admin_btn.setVisible(false);
+		}
+		
 		for(JButton btn: btnlist) {
-			main.board_panel.add(btn);
+//			main.board_panel.add(btn);
+			grid_panel.add(btn);
 			btn.addActionListener(new ctgAction());
 		}
 		
+		admin_btn.addActionListener(new ctgAction());
+		
+		main.board_panel.add(BorderLayout.CENTER, grid_panel);
+		main.board_panel.add(BorderLayout.SOUTH, admin_btn);
 		main.content_panel.add(main.board_panel);
 		main.jf.setVisible(true);
 	}
@@ -78,6 +91,8 @@ public class CategoryUI {
 				new BoardUI(main, CategoryUI.BOONSIK);
 			}else if(obj == btnlist.get(CategoryUI.KOREA_FOOD)) {
 				new BoardUI(main, CategoryUI.KOREA_FOOD);
+			}else if(obj == admin_btn) {
+				new AllBoardUI(main, CategoryUI.ADMIN);
 			}
 		}
 	}

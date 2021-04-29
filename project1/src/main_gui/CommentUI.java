@@ -185,7 +185,8 @@ class TableUpdateCell extends AbstractCellEditor implements TableCellEditor, Tab
 				int result = 0;
 				
 				if(name.equals("수정")) {
-					if(contentui.main.member.getId().equals(commentui.commentlist.get(commentui.table.getSelectedRow()).getId())) {
+					if(contentui.main.member.getId().equals(commentui.commentlist.get(commentui.table.getSelectedRow()).getId())
+							||contentui.main.member.getId().equals("admin")) {
 						String value = commentui.table.getValueAt(commentui.table.getSelectedRow(), commentui.table.getSelectedColumn()-1).toString();
 						int update_result = contentui.main.system.update_reply(value, commentui.commentlist.get(commentui.table.getSelectedRow()));
 						if(update_result!=0) {
@@ -197,7 +198,8 @@ class TableUpdateCell extends AbstractCellEditor implements TableCellEditor, Tab
 						new ContentUI(contentui.main, contentui.contents_vo);
 					}
 				}else if(name.equals("삭제")) {
-					if(contentui.main.member.getId().equals(commentui.commentlist.get(commentui.table.getSelectedRow()).getId())) {
+					if(contentui.main.member.getId().equals(commentui.commentlist.get(commentui.table.getSelectedRow()).getId())
+							||contentui.main.member.getId().equals("admin")) {
 						int confirm = JOptionPane.showConfirmDialog(null, Commons.getMsg("정말로 삭제하시겠습니까?"));
 						if(confirm==JOptionPane.OK_OPTION) {
 							int delete_result = contentui.main.system.delete_reply(commentui.commentlist.get(commentui.table.getSelectedRow()));

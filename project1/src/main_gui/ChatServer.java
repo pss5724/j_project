@@ -20,6 +20,7 @@ public class ChatServer {
 	public ChatServer() {
 		try {
 			server = new ServerSocket(9000);
+			System.out.println("º≠πˆ ∞°µø¡ﬂ");
 			new ClientrunThread().start();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,10 +88,11 @@ public class ChatServer {
 					}else if(vo.getStatus()==ChatVO.EXIT) {	//≈¿Â
 						vo.setMsg(vo.getUser()+"¥‘¿Ã ≈¿Â«œºÃΩ¿¥œ¥Ÿ.");
 						int idx = idlist.indexOf(vo.getUser());
+						ObjectOutputStream os_delete = oos_list.get(idx);
 						Iterator<ObjectOutputStream> ie = oos_list.iterator();
 						while(ie.hasNext()) {
 							ObjectOutputStream os = ie.next();
-							if(os == oos_list.get(idx)) {
+							if(os == os_delete) {
 								ie.remove();
 							}
 						}
@@ -105,7 +107,6 @@ public class ChatServer {
 				}
 				
 			} catch (Exception e) {
-//				e.printStackTrace();
 			}
 		}
 	}
