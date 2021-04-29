@@ -66,7 +66,9 @@ public class LoginUI{
 		LoginUIEvent eventObj = new LoginUIEvent(this, system);
 		login.addActionListener(eventObj);
 		join.addActionListener(eventObj);
+		pass_tf.addActionListener(eventObj);
 		jf.addWindowListener(eventObj);
+		
 
 	}
 

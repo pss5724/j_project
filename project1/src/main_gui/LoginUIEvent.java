@@ -29,7 +29,7 @@ public class LoginUIEvent extends WindowAdapter implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			
-			if(obj == ui.login) {
+			if(obj == ui.login || obj== ui.pass_tf) {
 				login_proc();
 			}else if(obj == ui.join) {
 				new JoinUI(system);

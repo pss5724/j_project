@@ -46,7 +46,6 @@ public class MyInfoUI implements ActionListener{
 		
 		//Method
 		public void init() {
-			System.out.println("확인2");
 			main.switch_panel(MainUI.MY);
 			main.my_panel.removeAll();
 			main.my_panel.setLayout(new BorderLayout());
@@ -140,13 +139,31 @@ public class MyInfoUI implements ActionListener{
 			member.setHp(tf_list.get(2).getText());
 			member.setLocation(location_check());
 			
-			boolean result = main.system.memberUpdate(member,main.member.getId());
-			if(result != false) {
-				JOptionPane.showMessageDialog(null, Commons.getMsg("수정완료"));
-				new MyInfoUI(main);
+			
+			
+			if(tf_list.get(0).getText().equals("")) {
+				JOptionPane.showMessageDialog(null, Commons.getMsg("비밀번호를 입력하세요"));
+				tf_list.get(0).requestFocus();
+			}else if(tf_list.get(1).getText().equals("")) {
+				JOptionPane.showMessageDialog(null, Commons.getMsg("이름을 입력하세요"));
+				tf_list.get(1).requestFocus();
+			}else if(tf_list.get(2).getText().equals("")) {
+				JOptionPane.showMessageDialog(null, Commons.getMsg("핸드폰을 입력하세요"));
+				tf_list.get(1).requestFocus();
+			}else if(location_check().equals("")) {
+				JOptionPane.showMessageDialog(null, Commons.getMsg("지역을 선택하세요"));
 			}else {
-				JOptionPane.showMessageDialog(null, Commons.getMsg("수정실패"));
+				boolean result = main.system.memberUpdate(member,main.member.getId());
+					if(result != false) {
+						JOptionPane.showMessageDialog(null, Commons.getMsg("수정완료"));
+						new MyInfoUI(main);
+					}	else {
+						JOptionPane.showMessageDialog(null, Commons.getMsg("수정실패"));
+					}
 			}
+				
+			
+		
 		}
 		
 		
