@@ -133,13 +133,6 @@ public class MyInfoUI implements ActionListener{
 		
 		public void update_result_proc() {
 			
-			MemberVO member = new MemberVO();
-			member.setPass(tf_list.get(0).getText());
-			member.setName(tf_list.get(1).getText());
-			member.setHp(tf_list.get(2).getText());
-			member.setLocation(location_check());
-			
-			
 			
 			if(tf_list.get(0).getText().equals("")) {
 				JOptionPane.showMessageDialog(null, Commons.getMsg("비밀번호를 입력하세요"));
@@ -153,6 +146,14 @@ public class MyInfoUI implements ActionListener{
 			}else if(location_check().equals("")) {
 				JOptionPane.showMessageDialog(null, Commons.getMsg("지역을 선택하세요"));
 			}else {
+				MemberVO member = new MemberVO();
+				member.setPass(tf_list.get(0).getText());
+				member.setName(tf_list.get(1).getText());
+				member.setHp(tf_list.get(2).getText());
+				member.setLocation(location_check());
+				member.setId(main.member.getId());
+				member.setMemberNum(main.member.getMemberNum());
+				main.member = member;
 				boolean result = main.system.memberUpdate(member,main.member.getId());
 					if(result != false) {
 						JOptionPane.showMessageDialog(null, Commons.getMsg("수정완료"));
@@ -162,7 +163,6 @@ public class MyInfoUI implements ActionListener{
 					}
 			}
 				
-			
 		
 		}
 		

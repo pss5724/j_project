@@ -104,7 +104,9 @@ public class MainUI {
 		top_panel.add(BorderLayout.NORTH, menu_panel);
 
 		content_panel.add(category_panel);
-
+		
+		
+		
 		jf.add(BorderLayout.NORTH, top_panel);
 		jf.add(BorderLayout.CENTER, content_panel);
 
@@ -121,9 +123,19 @@ public class MainUI {
 		logout.addActionListener(new MainUIEvent(this));
 
 	}
+	
+	public void change_info() {
+		info = new JLabel(member.getId() + "님 환영합니다. 지역은 " + member.getLocation());
+		
+		info_panel.add(info);
+		info_panel.add(logout);
+		
+	}
 
 	public void switch_panel(int num) {
 		content_panel.removeAll();
+		info_panel.removeAll();
+		change_info();
 		board_panel.setVisible(false);
 		read_panel.setVisible(false);
 		write_panel.setVisible(false);
