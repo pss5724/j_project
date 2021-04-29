@@ -51,7 +51,8 @@ public class MyCommentUI {
       //댓글 패널
       commentlist = main.system.select_reply(main.member); //시스템 가서 댓글 불러오기.
       if(commentlist.size() ==0) {   //댓글 없을 때
-         JLabel nocomment = new JLabel("작성한 댓글이 없습니다");
+         JLabel nocomment = new JLabel("작성한 댓글이 없습니다.");
+         nocomment.setFont(Commons.getFont());
          mycomment_panel.add(BorderLayout.CENTER,nocomment);
       }else {   //댓글 있을 때
          model.setNumRows(0);
@@ -98,12 +99,11 @@ public class MyCommentUI {
          pane.setSize(table_size);
          
          mycomment_panel.add(BorderLayout.CENTER, pane);
-         main.mycontent_panel.add(BorderLayout.CENTER, mycomment_panel);
-         main.content_panel.add(main.mycontent_panel);
-         main.jf.setVisible(true);
          
-
       }
+	     main.mycontent_panel.add(BorderLayout.CENTER, mycomment_panel);
+	     main.content_panel.add(main.mycontent_panel);
+	     main.jf.setVisible(true);
          
    }
 }
