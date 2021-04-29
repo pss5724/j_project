@@ -75,7 +75,7 @@ public class CommentUI {
 			
 			tableSize=0;
 			for(String comment:comments) {
-				int comm = (comment.length()/15)*20;
+				int comm = (comment.length()/9)*20;
 				if(comm==0) comm=20;
 				tableSize += comm;
 			}
@@ -259,8 +259,10 @@ class TableCommentSet extends AbstractCellEditor implements TableCellEditor,Tabl
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		jta.setText(value.toString());
-		int heightSize = (value.toString().length()/15)*20;
+		System.out.println((value.toString().length()/9));
+		int heightSize = (value.toString().length()/9)*20;
 		if(heightSize==0) heightSize=20;
+		
 		jta.setSize(table.getColumnModel().getColumn(column).getWidth(),
 				heightSize);
 		if(table.getRowHeight(row)!=heightSize) {
