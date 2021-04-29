@@ -51,7 +51,7 @@ public class JoinUI {
 		tf_panel = new Panel(new GridLayout(5,1));
 		btn_panel = new Panel();
 		join = new JButton("회원가입");
-		reset = new JButton("취소하기");
+		reset = new JButton("초기화");
 		check = new JButton("중복체크");
 		btn_panel.add(join);	btn_panel.add(reset);
 		

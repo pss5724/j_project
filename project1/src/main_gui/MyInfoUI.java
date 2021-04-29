@@ -57,7 +57,7 @@ public class MyInfoUI implements ActionListener{
 			Panel btn_panel = new Panel();
 			String[] namelist = {"비밀번호","이름","핸드폰","지역"};
 			btn_update = new JButton("수정");
-			btn_reset = new JButton("취소");
+			btn_reset = new JButton("초기화");
 			btn_update.setFont(Commons.getFont());
 			btn_reset.setFont(Commons.getFont());
 			btn_panel.add(btn_update);	btn_panel.add(btn_reset);		
