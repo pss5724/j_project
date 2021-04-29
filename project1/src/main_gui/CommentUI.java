@@ -113,9 +113,9 @@ public class CommentUI {
 			table.getColumnModel().getColumn(1).setResizable(false);
 			table.getColumnModel().getColumn(1).setPreferredWidth(120);
 			table.getColumnModel().getColumn(2).setResizable(false);
-			table.getColumnModel().getColumn(2).setPreferredWidth(30);
+			table.getColumnModel().getColumn(2).setPreferredWidth(40);
 			table.getColumnModel().getColumn(3).setResizable(false);
-			table.getColumnModel().getColumn(3).setPreferredWidth(30);
+			table.getColumnModel().getColumn(3).setPreferredWidth(40);
 			
 			JScrollPane pane = new JScrollPane(table);
 			//테이블 사이즈 지정
