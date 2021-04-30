@@ -134,26 +134,29 @@ public class WriteUpdateUI {
 				String write_ctg = (String)jcb.getSelectedItem();
 				String write_title = title_tf.getText();
 				String write_content = contents_ta.getText();
-				
-				if(write_title.trim().equals("")) {
-					JOptionPane.showMessageDialog(null, "제목을 입력해주세요.");
+				if(write_ctg==null) {
+					JOptionPane.showMessageDialog(null, Commons.getMsg("카테고리를 선택해주세요."));
+				}else if(write_title.trim().equals("")) {
+					JOptionPane.showMessageDialog(null, Commons.getMsg("제목을 입력해주세요."));
+					title_tf.requestFocus();
 				}else if(write_content.trim().equals("")) {
-					JOptionPane.showMessageDialog(null, "내용을 입력해주세요.");
+					JOptionPane.showMessageDialog(null, Commons.getMsg("내용을 입력해주세요."));
+					contents_ta.requestFocus();
 				}else {
 					if(status==WriteUpdateUI.WRITE_INSERT) {	//글 등록일 경우
 						if(main.system.writeArticle(member,write_ctg,write_title,write_content)){
-							JOptionPane.showMessageDialog(null, "게시글이 등록되었습니다.");
+							JOptionPane.showMessageDialog(null, Commons.getMsg("게시글이 등록되었습니다."));
 							new BoardUI(main,food_num);
 						}
 					}else if(status==WriteUpdateUI.WRITE_UPDATE) {	//글 수정일 경우
 						if(main.system.updateArticle(write_ctg,write_title,write_content,update_vo)) {
-							JOptionPane.showMessageDialog(null, "수정이 완료되었습니다.");
+							JOptionPane.showMessageDialog(null, Commons.getMsg("수정이 완료되었습니다."));
 							update_vo.setCategory(write_ctg);
 							update_vo.setTitle(write_title);
 							update_vo.setContent(write_content);
 							new ContentUI(main, update_vo);
 						}else {
-							JOptionPane.showMessageDialog(null, "수정이 실패하였습니다.");
+							JOptionPane.showMessageDialog(null, Commons.getMsg("수정이 실패하였습니다."));
 						}
 					}
 				}
