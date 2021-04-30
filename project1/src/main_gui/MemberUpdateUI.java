@@ -108,10 +108,10 @@ public class MemberUpdateUI implements ActionListener {
 		}else if(location_check().equals("")) {
 			JOptionPane.showMessageDialog(null, Commons.getMsg("지역을 선택하세요"));
 		}else {
-			boolean result = main.system.memberUpdate(member,main.member.getId());
+			boolean result = main.system.memberUpdate(member,tf_search.getText());
 				if(result != false) {
 					JOptionPane.showMessageDialog(null, Commons.getMsg("수정완료"));
-					new MyInfoUI(main);
+					new MemberSelectUI(main);
 				}	else {
 					JOptionPane.showMessageDialog(null, Commons.getMsg("수정실패"));
 				}
