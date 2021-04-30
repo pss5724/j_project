@@ -73,6 +73,7 @@ public class MemberDeleteUI implements ActionListener{
 		}else if(obj == btn_delete) {
 			int result = JOptionPane.showConfirmDialog(null,"정말로 삭제하시겠습니까?");
 			if(result ==0) {
+				System.out.println(tf_search.getText());
 				if(main.system.memberDelete(tf_search.getText()) == true) {
 					JOptionPane.showMessageDialog(null,"삭제 완료");
 					new MemberSelectUI(main);
@@ -136,7 +137,7 @@ public class MemberDeleteUI implements ActionListener{
 		main.jf.setVisible(true);		
 		
 		delete_form_panel.add(BorderLayout.CENTER, pane);
-		delete_form_panel.add(BorderLayout.SOUTH, btn_panel);
+		main.member_panel.add(BorderLayout.SOUTH, btn_panel);
 		
 		btn_delete.addActionListener(this);
 		
